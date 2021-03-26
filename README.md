@@ -5,6 +5,9 @@ Repositorio de IPC1, programación Web.
 
 | Comando      | Descripción    |
 | ------------- |:-------------:|
-|       |  |
-|      |      |
-|  |      |
+|  git clone direccion_repositorio     |  |
+|  git pull    |      |
+|  git . add --all|      |
+|  git commit -m|      |
+|  git |      |
+|  git . add -all|      |
