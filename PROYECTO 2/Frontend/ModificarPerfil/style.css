@@ -5,7 +5,7 @@
 body {
   perspective: 800px;
   height: 100vh;
-  margin-bottom: 140px;
+  margin: 0;
   overflow:auto;
   font-family: "Gudea", sans-serif;
   background: linear-gradient(135deg, #04a18f 0%,  #f8e7e7 100%);
@@ -22,15 +22,15 @@ a:hover {
 }
 
 .form {
-  /*background: rgba(19, 35, 47, 0.9);*/
-  background: rgba(19, 35, 47, 0.9);
-  border-top: 2px solid #ffffff;
-  border-bottom: 2px solid #ffffff;
-  padding: 40px;
-  max-width: 600px;
-  margin: 40px auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.9);
+   /*background: rgba(19, 35, 47, 0.9);*/
+   background: rgba(19, 35, 47, 0.9);
+   border-top: 2px solid #ffffff;
+   border-bottom: 2px solid #ffffff;
+   padding: 40px;
+   max-width: 600px;
+   margin: 40px auto;
+   border-radius: 4px;
+   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.9);
 }
 
 .tab-group {
@@ -55,8 +55,9 @@ a:hover {
   text-align: center;
   cursor: pointer;
   transition: .5s ease;
-  border-radius: 3px;
+  border-radius: 10px;
 }
+
 .tab-group li a:hover {
   background: #04a18f;
   color: #ffffff;
@@ -89,6 +90,7 @@ label {
   pointer-events: none;
   font-size: 22px;
 }
+
 label .req {
   margin: 2px;
   color: #04a18f;
