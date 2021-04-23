@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Modulo Administrador</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./style.css">
+<body>
+
+<div class="w3-top">
+  <div class="w3-bar w3-purple w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Admin</a>
+    <a href="#carga" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Carga Masiva</a>
+    <a href="#vipaci" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Pacientes</a>
+    <a href="#vidoc" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Doctores</a>
+    <a href="#vienfe" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Enfermeras</a>
+    <a href="#vireme" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Medicamentos</a>
+    <a href="../PaginaPrincipal/PaginaInicio.html"><button class="bottun w3-button w3-black w3-padding-large w3-large">Salir</button></a>
+  </div>
+</div>
+
+<header class="w3-container w3-purple w3-center" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo titulo">Modulo Administrador</h1>
+
+</header>
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="carga">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1 class="titulo">Carga Masiva</h1>
+    </br>
+    <h4>Cargar Pacientes</h4>
+    </br>
+    <input id="selectpaci" type="file" class="w3-button w3-khaki"/>
+    <button id="cargapaci" class="lugar w3-button w3-khaki">Cargar Archivo</button>
+  </br></br>
+    <h4>Cargar Doctores</h4>
+    </br>
+    <input id="selectdoc" type="file" class="w3-button w3-lime"/>
+    <button id="cargadoc" class="lugar w3-button w3-lime">Cargar Archivo</button>
+  </br></br>
+    <h4>Cargar Enfermeras</h4>
+    </br>
+    <input id="selectenfe" type="file" class="w3-button w3-pale-red"/>
+    <button id="cargaenfe" class="lugar w3-button w3-pale-red">Cargar Archivo</button>
+  </br></br>
+    <h4>Cargar Medicamentos</h4>
+    </br>
+    <input id="selectreme" type="file" class="w3-button w3-light-blue"/>
+    <button id="cargareme" class="lugar w3-button w3-light-blue">Cargar Archivo</button>
+
+     </div>
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container w3-blue-grey" id="vipaci">
+    <div class="w3-content">
+      <div class="w3-twothird">
+        <h1 class="titulo">Visualización Pacientes</h1>
+      </div>
+    </br>
+        <div id="tablapaciente" class="row"></div>
+    </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container w3-light-grey" id="vidoc">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1 class="titulo">Visualización Doctores</h1>
+    </div>
+
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container w3-blue-grey" id="vienfe">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1 class="titulo">Visualización Enfermeras</h1>
+    </div>
+
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container w3-light-grey" id="vireme">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1 class="titulo">Visualización Medicamentos</h1>
+    </div>
+
+  </div>
+</div>
+
+<script  src="./script.js"></script>
+
+</body>
+</html>
