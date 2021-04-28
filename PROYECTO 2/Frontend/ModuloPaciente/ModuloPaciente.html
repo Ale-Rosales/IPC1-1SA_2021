@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Modulo Paciente</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+<div class="w3-top">
+  <div class="w3-bar w3-deep-orange w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Paciente</a>
+    <a href="#cita" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Solicitar Cita</a>
+    <a href="#comprar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Comprar Medicina</a>
+    <a href="#pedido" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Pedido</a>
+    <a href="../PaginaPrincipal/PaginaInicio.html"><button class="bottun w3-button w3-black w3-padding-large w3-large">Salir</button></a>
+  </div>
+</div>
+
+<header class="w3-container w3-deep-orange w3-center" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo titulo">Paciente</h1>
+</header>
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="cita">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1 class="titulo">Solicitar Cita</h1>
+    <br>
+      <h5>Fecha:</h5>
+      <input type="date" id="pFecha" name="fechaCite"/>
+    </br>
+      <h5 class="hora">Hora:</h5>
+      <input id="nPaciente" style="width: 100px; text-align: center;"  type="time"/>
+    </br>
+      <h5>Motivo:</h5>
+      <input id="pDescri" type="text" style="WIDTH: 450px; HEIGHT: 55px;"/>
+    </br>
+    </br>
+    <button class="bottun w3-button w3-black w3-padding-large w3-large">Pedir Cita</button>
+    </div>
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container w3-light-blue" id="comprar">
+    <div class="w3-content">
+      <div class="w3-twothird">
+        <h1 class="titulo">Comprar Medicina</h1>
+ 
+      </div>
+
+    </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="pedido">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1 class="titulo">Pedido</h1>
+    </div>
+
+  </div>
+</div>
+
+<script  src="./script.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+
+
+</body>
+</html>

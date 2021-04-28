@@ -58,21 +58,25 @@ function IniciarSesion(){
   }
 
   fetch(`http://localhost:5000/login/${usuario.value}/${pass.value}`)
-  // Convirtiendo de string a texto
   .then(response => response.json())
-  // Manejando la data
   .then(data => {
-      console.log(data.nombre)
-      if(data.nombre=="false"){
-          alert('Verifique sus Credenciales')
-          pass.value='';
-          usuario.value='';
-      }else{
-          alert(`Bienvenido ${data.nombre}`)
-          window.location.href='../ModuloAdmin/ModuloAdmin.html'
-      }
+      if(data.tipousuario == "Admin"){
+        alert(`Bienvenido ${data.usuario}`)
+        window.location.href='../ModuloAdmin/ModuloAdmin.html'
+      }else if(data.tipousuario == "Paciente"){
+        alert(`Bienvenido ${data.usuario}`)
+        window.location.href='../ModuloPaciente/ModuloPaciente.html'
+      }else if(data.tipousuario == "Doctor"){
+        alert(`Bienvenido ${data.usuario}`)
+        window.location.href='../ModuloDoctor/ModuloDoctor.html'
+      }else if(data.tipousuario == "Enfermera"){
+        alert(`Bienvenido ${data.usuario}`)
+        window.location.href='../ModuloEnfermera/ModuloEnfermera.html'
+      }else if(data.usuario=="false"){
+        alert('Verifique sus Credenciales')
+        pass.value='';
+        usuario.value='';}
   })
-
 }
 
 //FUNCION PARA REGISTRAR USUARIOS
@@ -80,30 +84,25 @@ function CrearUsuario(){
   let nombre = document.getElementById("rNombre");
   let apellido = document.getElementById("rApellido");
   let fecha = document.getElementById("rFecha");
-  let sexo = findSelection('genero') //document.getElementById('masculino' | 'femenino');
+  let sexo = findSelection('genero')
   let usuario = document.getElementById("rUser");
   let pass = document.getElementById("rPass");
   let tel = document.getElementById("rCel");
   
-  /*if(nombre.value==''){
-      alert('Debe llenar todos los campos')
-      return
-  }*/
-
-  //Aca realizamos la peticion
-  fetch('http://localhost:5000/registro',
+  fetch('http://localhost:5000/pacientes',
   {
       method:'POST',
       headers,
-      // El cuerpo, es decir los valores que vamos a mandar
       body: `{
-              "nPaciente":"${nombre.value}",
-              "aPaciente":"${apellido.value}",
-              "fPaciente":"${fecha.value}",
-              "sPaciente":"${sexo}",
-              "uPaciente":"${usuario.value}",
-              "cPaciente":"${pass.value}",
-              "tPaciente":"${tel.value}"
+              "nombre":"${nombre.value}",
+              "apellido":"${apellido.value}",
+              "fechaNAC":"${fecha.value}",
+              "sexo":"${sexo}",
+              "usuario":"${usuario.value}",
+              "contraseña":"${pass.value}",
+              "especialidad":"SinEspecialidad",
+              "telefono":"${tel.value}",
+              "tipousuario":"Paciente"
               }`
   })
   .then(response => response.json())

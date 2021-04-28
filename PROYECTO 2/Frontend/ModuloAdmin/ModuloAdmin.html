@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Modulo Administrador</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./style.css">
+<head>
+  <title>Modulo Administrador</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
 <body>
 
 <div class="w3-top">
@@ -24,8 +27,7 @@
 </div>
 
 <header class="w3-container w3-purple w3-center" style="padding:128px 16px">
-  <h1 class="w3-margin w3-jumbo titulo">Modulo Administrador</h1>
-
+  <h1 class="w3-margin w3-jumbo titulo">Administrador</h1>
 </header>
 
 <div class="w3-row-padding w3-padding-64 w3-container" id="carga">
@@ -36,17 +38,17 @@
     <h4>Cargar Pacientes</h4>
     </br>
     <input id="selectpaci" type="file" class="w3-button w3-khaki"/>
-    <button id="cargapaci" class="lugar w3-button w3-khaki">Cargar Archivo</button>
+    <button id="cargapaci" class="lugar w3-button w3-khaki" onclick="cargarpaciente()">Cargar Archivo</button>
   </br></br>
     <h4>Cargar Doctores</h4>
     </br>
     <input id="selectdoc" type="file" class="w3-button w3-lime"/>
-    <button id="cargadoc" class="lugar w3-button w3-lime">Cargar Archivo</button>
+    <button id="cargadoc" class="lugar w3-button w3-lime" onclick="cargardoctor()">Cargar Archivo</button>
   </br></br>
     <h4>Cargar Enfermeras</h4>
     </br>
     <input id="selectenfe" type="file" class="w3-button w3-pale-red"/>
-    <button id="cargaenfe" class="lugar w3-button w3-pale-red">Cargar Archivo</button>
+    <button id="cargaenfe" class="lugar w3-button w3-pale-red" onclick="cargarenfermera()">Cargar Archivo</button>
   </br></br>
     <h4>Cargar Medicamentos</h4>
     </br>
@@ -63,15 +65,18 @@
         <h1 class="titulo">Visualización Pacientes</h1>
       </div>
     </br>
-        <div id="tablapaciente" class="row"></div>
+        <div id="tablapaciente"></div>
+    <!-- <button class="botonreporte w3-button w3-khaki">Reporte PDF</button> -->
     </div>
 </div>
 
-<div class="w3-row-padding w3-padding-64 w3-container w3-light-grey" id="vidoc">
+<div class="w3-row-padding w3-padding-64 w3-container" id="vidoc">
   <div class="w3-content">
     <div class="w3-twothird">
       <h1 class="titulo">Visualización Doctores</h1>
     </div>
+  </br>
+    <div id="tabladoctor"></div>
 
   </div>
 </div>
@@ -81,11 +86,13 @@
     <div class="w3-twothird">
       <h1 class="titulo">Visualización Enfermeras</h1>
     </div>
+  </br>
+    <div id="tablaenfermera"></div>
 
   </div>
 </div>
 
-<div class="w3-row-padding w3-padding-64 w3-container w3-light-grey" id="vireme">
+<div class="w3-row-padding w3-padding-64 w3-container" id="vireme">
   <div class="w3-content">
     <div class="w3-twothird">
       <h1 class="titulo">Visualización Medicamentos</h1>
@@ -95,6 +102,9 @@
 </div>
 
 <script  src="./script.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+
 
 </body>
 </html>
