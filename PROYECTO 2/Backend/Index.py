@@ -48,6 +48,18 @@ def carga_pacientes():
     gestor.cargar_pacientes(dato['data'])
     return '{"data":"Pacientes Cargados"}'
 
+@app.route('/pacientes/<usuario>',methods=['PUT'])
+def actualizar_paciente(usuario):
+    dato = request.json
+    if gestor.actualizar_paciente(usuario,dato['nombre'],dato['apellido'],dato['fechaNAC'],dato['sexo'],
+    dato['usuario'],dato['contraseña'],'SinEspecialidad',dato['telefono'],'Paciente'):
+        return '{"data":"Actualizado"}'
+    return '{"data":"Error"}'
+
+@app.route('/pacientes/<usuario>')
+def buscarpaciente(usuario):
+    return gestor.buscarpaciente(usuario)
+
 #DOCTORES
 @app.route('/doctores',methods=['POST'])
 def registrardoctores():

@@ -43,16 +43,15 @@ $('.tab a').on('click', function (e) {
   $(target).fadeIn(600); 
 });
 
-
 // FUNCION PARA INICIAR SESION
 function IniciarSesion(){
   let usuario = document.getElementById("lUser");
   let pass = document.getElementById("lPass");
 
-  if(usuario.value==''){
+  if(usuario.value == ''){
     alert('Debe llenar todos los campos')
     return
-  }else if(pass.value==''){
+  }else if(pass.value == ''){
     alert('Debe llenar todos los campos')
     return
   }
@@ -72,7 +71,7 @@ function IniciarSesion(){
       }else if(data.tipousuario == "Enfermera"){
         alert(`Bienvenido ${data.usuario}`)
         window.location.href='../ModuloEnfermera/ModuloEnfermera.html'
-      }else if(data.usuario=="false"){
+      }else if(data.usuario == "false"){
         alert('Verifique sus Credenciales')
         pass.value='';
         usuario.value='';}
@@ -88,7 +87,27 @@ function CrearUsuario(){
   let usuario = document.getElementById("rUser");
   let pass = document.getElementById("rPass");
   let tel = document.getElementById("rCel");
-  
+
+  if(nombre.value == ''){
+    alert('Debe llenar los campos obligatorios')
+    return
+  }else if(apellido.value == ''){
+    alert('Debe llenar los campos obligatorios')
+    return
+  }else if(fecha.value == ''){
+    alert('Debe llenar los campos obligatorios')
+    return
+  }else if(!sexo){
+    alert('Debe llenar los campos obligatorios')
+    return
+  }else if(usuario.value == ''){
+    alert('Debe llenar los campos obligatorios')
+    return
+  }else if(pass.value == ''){
+    alert('Debe llenar los campos obligatorios')
+    return
+  }
+
   fetch('http://localhost:5000/pacientes',
   {
       method:'POST',
@@ -144,7 +163,7 @@ function CrearUsuario(){
 
 }
 
-//FUNCIONES VARIAS
+//FUNCIONES VARIAS PARA LA SELECCION DE GENERO
 function unselect(){
   document.querySelectorAll('[name=genero]').forEach((x) => x.checked=false);
 }
@@ -155,11 +174,6 @@ function findSelection(field) {
   for (i=0; i < sizes; i++) {
           if (test[i].checked==true) {
           return test[i].value;
-      }
+          }
   }
-}
-
-function obtenerFecha(e){
-  var fecha = moment(e.value);
-  fecha.format("DD/MM/YYYY");
 }

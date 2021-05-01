@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
   <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -66,7 +68,66 @@
       </div>
     </br>
         <div id="tablapaciente"></div>
-    <!-- <button class="botonreporte w3-button w3-khaki">Reporte PDF</button> -->
+      
+        <button class="botonreporte w3-button w3-khaki" onclick="PDFPaciente()">Reporte PDF</button>
+      <!-- -->
+      </br></br>
+        <div class="w3-twothird">
+          <h1 class="titulo2">Modificar Paciente</h1>
+        </div>
+        </br></br></br>
+          <div class="form">
+            <div class="tab-content">
+              <div class="top-row">
+                <div class="field-wrap">
+                  <label>Usuario</label>
+                  <input id="usserPACI" type="text" required autocomplete="off"/>
+                </div>
+
+                <div class="field-wrap">
+                <label>Usuario Nuevo</label>
+                    <input id="usserNPACI" type="text" required autocomplete="off"/>
+                </div>
+              </div>
+                                        </br>
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label>Nombre</label>
+                    <input id="namePACI" type="text" required autocomplete="off" />
+                  </div>
+              
+                  <div class="field-wrap">
+                    <label>Apellido</label>
+                    <input id="lastnamePACI" type="text" required autocomplete="off"/>
+                  </div>
+                </div>
+                                      </br>
+                <div class="field-wrap">
+                  <label>Fecha de nacimiento</label> </br></br>
+                  <input id="borndatePACI" type="date" id="fecha" name="fechaNac" required> 
+                </div>
+                                    </br>
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label>Sexo</label>
+                    <input id="genderPACI" type="text" required autocomplete="off"/>
+                  </div>
+                  
+                  <div class="field-wrap">
+                    <label>Contraseña</label>
+                    <input id="passPACI" type="password" required autocomplete="off"/>
+                  </div>
+                </div>
+                                      </br>
+                  <div class="field-wrap">
+                    <label>Teléfono</label>
+                    <input id="phonePACI" type="tel" autocomplete="off"/>
+                  </div>
+                                    </br>
+                <button class="button w3-button" onclick="modificarpaciente()">Modificar</button>
+            </div> 
+          </div> 
+  <!-- -->
     </div>
 </div>
 
@@ -78,6 +139,65 @@
   </br>
     <div id="tabladoctor"></div>
 
+    <button class="botonreporte w3-button w3-khaki" onclick="PDFDoctor()">Reporte PDF</button>
+      <!-- -->
+        </br></br>
+        <div class="w3-twothird">
+          <h1 class="titulo2">Modificar Doctor</h1>
+        </div>
+        </br></br></br>
+          <div class="formCOLOR">
+            <div class="tab-content">
+              <div class="top-row">
+                <div class="field-wrap">
+                  <label class="labelCOLOR">Usuario</label>
+                  <input id="usserDOC" type="text" required autocomplete="off"/>
+                </div>
+
+                <div class="field-wrap">
+                <label class="labelCOLOR">Usuario Nuevo</label>
+                    <input id="usserNDOC" type="text" required autocomplete="off"/>
+                </div>
+              </div>
+                                        </br>
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Nombre</label>
+                    <input id="nameDOC" type="text" required autocomplete="off" />
+                  </div>
+              
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Apellido</label>
+                    <input id="lastnameDOC" type="text" required autocomplete="off"/>
+                  </div>
+                </div>
+                                      </br>
+                <div class="field-wrap">
+                  <label class="labelCOLOR">Fecha de nacimiento</label> </br></br>
+                  <input id="borndateDOC" type="date" id="fecha" name="fechaNac" required> 
+                </div>
+                                    </br>
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Sexo</label>
+                    <input id="genderDOC" type="text" required autocomplete="off"/>
+                  </div>
+                  
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Contraseña</label>
+                    <input id="passDOC" type="password" required autocomplete="off"/>
+                  </div>
+                </div>
+                                      </br>
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Teléfono</label>
+                    <input id="phoneDOC" type="tel" autocomplete="off"/>
+                  </div>
+                                    </br>
+                <button class="button w3-button" onclick="">Modificar</button>
+            </div> 
+          </div> 
+      <!-- -->
   </div>
 </div>
 
@@ -89,6 +209,65 @@
   </br>
     <div id="tablaenfermera"></div>
 
+    <button class="botonreporte w3-button w3-khaki" onclick="PDFEnfermera()">Reporte PDF</button>
+        <!-- -->
+          </br></br>
+          <div class="w3-twothird">
+            <h1 class="titulo2">Modificar Enfermera</h1>
+          </div>
+          </br></br></br>
+            <div class="form">
+              <div class="tab-content">
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label>Usuario</label>
+                    <input id="usserEN" type="text" required autocomplete="off"/>
+                  </div>
+
+                  <div class="field-wrap">
+                  <label>Usuario Nuevo</label>
+                      <input id="usserNEN" type="text" required autocomplete="off"/>
+                  </div>
+                </div>
+                                          </br>
+                  <div class="top-row">
+                    <div class="field-wrap">
+                      <label>Nombre</label>
+                      <input id="nameEN" type="text" required autocomplete="off" />
+                    </div>
+                
+                    <div class="field-wrap">
+                      <label>Apellido</label>
+                      <input id="lastnameEN" type="text" required autocomplete="off"/>
+                    </div>
+                  </div>
+                                        </br>
+                  <div class="field-wrap">
+                    <label>Fecha de nacimiento</label> </br></br>
+                    <input id="borndateEN" type="date" id="fecha" name="fechaNac" required> 
+                  </div>
+                                      </br>
+                  <div class="top-row">
+                    <div class="field-wrap">
+                      <label>Sexo</label>
+                      <input id="genderEN" type="text" required autocomplete="off"/>
+                    </div>
+                    
+                    <div class="field-wrap">
+                      <label>Contraseña</label>
+                      <input id="passEN" type="password" required autocomplete="off"/>
+                    </div>
+                  </div>
+                                        </br>
+                    <div class="field-wrap">
+                      <label>Teléfono</label>
+                      <input id="phoneEN" type="tel" autocomplete="off"/>
+                    </div>
+                                      </br>
+                  <button class="button w3-button" onclick="">Modificar</button>
+              </div> 
+            </div> 
+        <!-- -->
   </div>
 </div>
 
