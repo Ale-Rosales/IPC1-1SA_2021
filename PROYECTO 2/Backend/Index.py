@@ -84,6 +84,14 @@ def carga_doctores():
     gestor.cargar_doctores(dato['data'])
     return '{"data":"Doctores Cargados"}'
 
+@app.route('/doctores/<usuario>',methods=['PUT'])
+def actualizar_doctores(usuario):
+    dato = request.json
+    if gestor.actualizar_doctor(usuario,dato['nombre'],dato['apellido'],dato['fechaNAC'],dato['sexo'],
+    dato['usuario'],dato['contraseña'],dato['especialidad'],dato['telefono'],'Doctor'):
+        return '{"data":"Actualizado"}'
+    return '{"data":"Error"}'
+
 #ENFERMERAS
 @app.route('/enfermeras',methods=['POST'])
 def registrarenfermeras():
@@ -108,7 +116,53 @@ def cargar_enfermeras():
     gestor.cargar_enfermeras(dato['data'])
     return '{"data":"Enfermeras Cargadas"}'
 
+@app.route('/enfermeras/<usuario>',methods=['PUT'])
+def actualizar_enfermera(usuario):
+    dato = request.json
+    if gestor.actualizar_enfermera(usuario,dato['nombre'],dato['apellido'],dato['fechaNAC'],dato['sexo'],
+    dato['usuario'],dato['contraseña'],'SinEspecialidad',dato['telefono'],'Enfermera'):
+        return '{"data":"Actualizado"}'
+    return '{"data":"Error"}'
+
+
 #MEDICAMENTOS
+@app.route('/obtenermedicamento')
+def obtener_remedios():
+    return gestor.obtener_remedios()
+
+@app.route('/remedios/<nRemedio>',methods=['DELETE'])
+def eliminar_remedio(nRemedio):
+    if(gestor.eliminar_remedio(nRemedio)):
+        return '{"data":"Eliminado"}'
+    return '{"data":"Error"}'
+
+@app.route('/cargaremedios', methods=['POST'])
+def cargar_remedios():
+    dato = request.json
+    gestor.cargar_remedios(dato['data'])
+    return '{"data":"Remedios Cargados"}'
+
+@app.route('/remedios/<nRemedio>',methods=['PUT'])
+def actualizar_remedio(nRemedio):
+    dato = request.json
+    if gestor.actualizar_remedio(nRemedio,dato['nRemedio'],dato['pRemedio'],dato['dRemedio'],dato['cRemedio']):
+        return '{"data":"Actualizado"}'
+    return '{"data":"Error"}'
+
+@app.route('/remedios',methods=['POST'])
+def crea_remedio():
+    dato = request.json
+    gestor.crear_remedio(dato['nRemedio'],dato['pRemedio'],dato['dRemedio'],dato['cRemedio'])
+    return '{"data":"Creado"}'
+
+
+
+
+
+
+
+
+
 
 
 #Iniciar el Servidor

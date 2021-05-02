@@ -70,7 +70,11 @@ function PDFPaciente(){
       datos
   };
     var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "landscape" });
-    doc.table(20, 10, datos, headers, { autoSize: false });
+    doc.setFont("courier");
+    doc.setFontType("bolditalic");
+    doc.setFontSize(30);
+    doc.text(90, 20, 'Listado de Pacientes');
+    doc.table(20, 30, datos, headers, { autoSize: false });
     doc.save("Pacientes.pdf")
   })
 }
@@ -131,7 +135,11 @@ function PDFDoctor(){
       datos
   };
     var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "landscape" });
-    doc.table(15, 10, datos, headers, { autoSize: false });
+    doc.setFont("courier");
+    doc.setFontType("bolditalic");
+    doc.setFontSize(30);
+    doc.text(90, 20, 'Listado de Doctores');
+    doc.table(15, 30, datos, headers, { autoSize: false });
     doc.save("Doctores.pdf")
   })
 }
@@ -190,8 +198,70 @@ function PDFEnfermera(){
       datos
   };
     var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "landscape" });
-    doc.table(20, 10, datos, headers, { autoSize: false });
+    doc.setFont("courier");
+    doc.setFontType("bolditalic");
+    doc.setFontSize(30);
+    doc.text(90, 20, 'Listado de Enfermeras');
+    doc.table(20, 30, datos, headers, { autoSize: false });
     doc.save("Enfermeras.pdf")
+  })
+}
+
+
+//PRUEBITA PDF MEDICAMENTOS
+function createHeadersMedica(keys) {
+  var result = [];
+  for (var i = 0; i < keys.length; i += 1) {
+    result.push({
+      id: keys[i],
+      name: keys[i],
+      prompt: keys[i],
+      width: 90,
+      align: "center",
+      padding: 0
+    });
+  }
+  return result;
+}
+
+function convertirDataMedicamentos(remedio){
+  var data ={
+    "Nombre": remedio.nRemedio,
+    "Precio(Q)": remedio.pRemedio,
+    "Descripción": remedio.dRemedio,
+    "Cantidad": remedio.cRemedio
+  }
+  return data
+}
+
+function PDFMedicamento(){
+  fetch('http://localhost:5000/obtenermedicamento')
+  .then(response => response.json())
+  .then(data=>{
+    //Declarando los headers
+    let headers = createHeadersMedica([
+      "Nombre",
+      "Precio(Q)",
+      "Descripción",
+      "Cantidad"
+    ]);
+    // Insertamos la data
+    let datos=[]
+    for(let i =0;i<data.length;i++){
+      datos.push(Object.assign({},convertirDataMedicamentos(data[i])))
+    }
+    console.log(datos)
+    var contentJsPdf = {
+      headers,
+      datos
+  };
+    var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "landscape" });
+    doc.setFont("courier");
+    doc.setFontType("bolditalic");
+    doc.setFontSize(30);
+    doc.text(90, 20, 'Listado de Medicamentos');
+    doc.table(15, 30, datos, headers, { autoSize: false });
+    doc.save("Medicamentos.pdf")
   })
 }
 
@@ -230,7 +300,7 @@ fetch('http://localhost:5000/obtenerpacientes')
                 <td>${data[i].contraseña}</td>
                 <td>${data[i].telefono}</td>
                 <td><button onclick="nimodo()" style="background-color:Transparent; background-repeat:no-repeat; border:none; cursor:pointer; overflow:hidden; outline:none;"><img src="imagenes/view.png" height="15" width="23"/></button></td>
-                <td><button onclick="verpaciente('${data[i].usuario}')" style="background-color:Transparent; background-repeat:no-repeat; border:none; cursor:pointer; overflow:hidden; outline:none;"><img src="imagenes/edit.png" height="18" width="22"/></button></td>
+                <td><button onclick="verpaciente()" style="background-color:Transparent; background-repeat:no-repeat; border:none; cursor:pointer; overflow:hidden; outline:none;"><img src="imagenes/edit.png" height="18" width="22"/></button></td>
                 <td><button onclick="eliminarpaciente('${data[i].usuario}')" style="background-color:Transparent; background-repeat:no-repeat; border:none; cursor:pointer; overflow:hidden; outline:none;"><img src="imagenes/delete.png" height="20" width="20"></button></td>
                 </tr>
                 `
@@ -275,7 +345,7 @@ function actualizarpaciente(){
                   <td>${data[i].contraseña}</td>
                   <td>${data[i].telefono}</td>
                   <td><button onclick="nimodo()" style="background-color:Transparent; background-repeat:no-repeat; border:none; cursor:pointer; overflow:hidden; outline:none;"><img src="imagenes/view.png" height="15" width="23"/></button></td>
-                  <td><button onclick="verpaciente('${data[i].usuario}')" style="background-color:Transparent; background-repeat:no-repeat; border:none; cursor:pointer; overflow:hidden; outline:none;"><img src="imagenes/edit.png" height="18" width="22"/></button></td>
+                  <td><button onclick="verpaciente()" style="background-color:Transparent; background-repeat:no-repeat; border:none; cursor:pointer; overflow:hidden; outline:none;"><img src="imagenes/edit.png" height="18" width="22"/></button></td>
                   <td><button onclick="eliminarpaciente('${data[i].usuario}')" style="background-color:Transparent; background-repeat:no-repeat; border:none; cursor:pointer; overflow:hidden; outline:none;"><img src="imagenes/delete.png" height="20" width="20"></button></td>
                   </tr>
                   `
@@ -328,6 +398,54 @@ function cargarpaciente(){
           
       }
   }
+}
+
+//MODIFICAR PACIENTE
+function modificarpaciente(){
+  let user = document.getElementById("usserPACI");
+  let usernew = document.getElementById("usserNPACI");
+  let nombre = document.getElementById("namePACI");
+  let apellido = document.getElementById("lastnamePACI");
+  let fecha = document.getElementById("borndatePACI");
+  let sexo = document.getElementById("genderPACI");
+  let contra = document.getElementById("passPACI");
+  let telefono = document.getElementById("phonePACI");
+
+  let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    
+      let reque = `{
+        "nombre":"${nombre.value}",
+        "apellido":"${apellido.value}",
+        "fechaNAC":"${fecha.value}",
+        "sexo":"${sexo.value}",
+        "usuario":"${usernew.value}",
+        "contraseña":"${contra.value}",
+        "telefono":"${telefono.value}"
+      }`
+    
+      fetch('http://localhost:5000/pacientes/'+user.value, {
+        method: 'PUT',
+        headers,
+        body: reque,
+      })
+      .then(response => response.json())
+      .then(result => {
+        console.log('Success:', result);
+        actualizarpaciente()
+        nombre.value=''
+        apellido.value=''
+        fecha.value=''
+        sexo.value=''
+        usernew.value=''
+        user.value=''
+        contra.value=''
+        telefono.value=''
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
 }
 
 //MOSTRAR DOCTORES
@@ -469,6 +587,57 @@ function cargardoctor(){
   }
 }
 
+//MODIFICAR DOCTOR
+function modificardoctor(){
+  let user = document.getElementById("usserDOC");
+  let usernew = document.getElementById("usserNDOC");
+  let nombre = document.getElementById("nameDOC");
+  let apellido = document.getElementById("lastnameDOC");
+  let fecha = document.getElementById("borndateDOC");
+  let sexo = document.getElementById("genderDOC");
+  let contra = document.getElementById("passDOC");
+  let espe = document.getElementById("speDOC");
+  let telefono = document.getElementById("phoneDOC");
+
+  let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    
+      let reque = `{
+        "nombre":"${nombre.value}",
+        "apellido":"${apellido.value}",
+        "fechaNAC":"${fecha.value}",
+        "sexo":"${sexo.value}",
+        "usuario":"${usernew.value}",
+        "contraseña":"${contra.value}",
+        "especialidad":"${espe.value}",
+        "telefono":"${telefono.value}"
+      }`
+    
+      fetch('http://localhost:5000/doctores/'+user.value, {
+        method: 'PUT',
+        headers,
+        body: reque,
+      })
+      .then(response => response.json())
+      .then(result => {
+        console.log('Success:', result);
+        actualizardoctor()
+        nombre.value=''
+        apellido.value=''
+        fecha.value=''
+        sexo.value=''
+        usernew.value=''
+        user.value=''
+        contra.value=''
+        espe.value=''
+        telefono.value=''
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+}
+
 //MOSTRAR ENFERMERAS
 let text4=""
 text4 = `<table class="table" id="tablaenfermera" style="margin:40px">
@@ -513,7 +682,7 @@ fetch('http://localhost:5000/obtenerenfermeras')
     document.getElementById("tablaenfermera").innerHTML = text4;
 });
 
-//ACTUALIZAR DOCTORES
+//ACTUALIZAR ENFERMERAS
 function actualizarenfermera(){
   let text4=""
   text4 = `<table class="table" id="tablaenfermera" style="margin:40px">
@@ -604,32 +773,165 @@ function cargarenfermera(){
   }
 }
 
-//MODIFICAR PACIENTE
-function modificarpaciente(){
-    let user = document.getElementById("usserPACI");
-    let usernew = document.getElementById("usserNPACI");
-    let nombre = document.getElementById("namePACI");
-    let apellido = document.getElementById("lastnamePACI");
-    let fecha = document.getElementById("borndatePACI");
-    let sexo = document.getElementById("genderPACI");
-    let contra = document.getElementById("passPACI");
-    let telefono = document.getElementById("phonePACI");
+//MODIFICAR ENFERMERA
+function modificarenfermera(){
+  let user = document.getElementById("usserEN");
+  let usernew = document.getElementById("usserNEN");
+  let nombre = document.getElementById("nameEN");
+  let apellido = document.getElementById("lastnameEN");
+  let fecha = document.getElementById("borndateEN");
+  let sexo = document.getElementById("genderEN");
+  let contra = document.getElementById("passEN");
+  let telefono = document.getElementById("phoneEN");
 
-    let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('Accept', 'application/json');
+  let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    
+      let reque = `{
+        "nombre":"${nombre.value}",
+        "apellido":"${apellido.value}",
+        "fechaNAC":"${fecha.value}",
+        "sexo":"${sexo.value}",
+        "usuario":"${usernew.value}",
+        "contraseña":"${contra.value}",
+        "telefono":"${telefono.value}"
+      }`
+    
+      fetch('http://localhost:5000/enfermeras/'+user.value, { //FALTA CAMBIARLO
+        method: 'PUT',
+        headers,
+        body: reque,
+      })
+      .then(response => response.json())
+      .then(result => {
+        console.log('Success:', result);
+        actualizarenfermera()
+        nombre.value=''
+        apellido.value=''
+        fecha.value=''
+        sexo.value=''
+        usernew.value=''
+        user.value=''
+        contra.value=''
+        telefono.value=''
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+}
+
+//MOSTRAR REMEDIOS
+let text="";
+fetch('http://localhost:5000/obtenermedicamento')
+.then(response => response.json())
+.then(data =>{
+    var i;
+    for(i=0;i<data.length;i++){
+        text+= `
+                <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px; border: 1px solid black;">
+                <div class="card bg-light" style="width: auto;">
+                <div class="card-body">
+                    <h4 style="position:relative; left: 20px;">${data[i].nRemedio}</h4>
+                    <h5 style="position:relative; left: 20px;">Descripción: ${data[i].dRemedio}</h5>
+                    <p style="position:relative; left: 20px;">Cantidad: ${data[i].cRemedio}</p>
+                    <p style="position:relative; left: 20px;">Precio(Q): ${data[i].pRemedio}</p>
+                    <button style="position:relative; left: 300px; color: white; background: rgb(240, 49, 49); text-transform: uppercase;" class="btn btn btn-danger" onclick="eliminaremedio('${data[i].nRemedio}')">Eliminar</button>
+                    </br></br>
+                </div>
+                </div>
+                </div>`
+    }
+    document.getElementById("cardsc").innerHTML = text;
+});
+
+//ACTUALIZAR REMEDIOS
+function actualizaremedio(){
+  let text="";
+  fetch('http://localhost:5000/obtenermedicamento')
+  .then(response => response.json())
+  .then(data =>{
+      var i;
+      for(i=0;i<data.length;i++){
+          text+= `
+                  <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px; border: 1px solid black;">
+                  <div class="card bg-light" style="width: auto;">
+                  <div class="card-body">
+                      <h4 style="position:relative; left: 20px;">${data[i].nRemedio}</h4>
+                      <h5 style="position:relative; left: 20px;">Descripción: ${data[i].dRemedio}</h5>
+                      <p style="position:relative; left: 20px;">Cantidad: ${data[i].cRemedio}</p>
+                      <p style="position:relative; left: 20px;">Precio(Q): ${data[i].pRemedio}</p>
+                      <button style="position:relative; left: 300px; color: white; background: rgb(240, 49, 49); text-transform: uppercase;" class="btn btn btn-danger" onclick="eliminaremedio('${data[i].nRemedio}')">Eliminar</button>
+                      </br></br>
+                  </div>
+                  </div>
+                  </div>`
+      }
+      document.getElementById("cardsc").innerHTML = text;
+  });
+}
+
+//ELIMINAR REMEDIOS
+function eliminaremedio(nRemedio){
+  fetch('http://localhost:5000/remedios/'+nRemedio,{
+      method:'DELETE'
+  })
+  .then(res => res.text())
+  .then(res=> {
+      actualizaremedio()
+  })
+}
+
+//CARGAR REMEDIOS
+function cargaremedios(){
+  let file = document.getElementById("selectreme").files[0];
+  if (file) {
+      let reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = function (evt) {
+          let cuerpo = {
+              data:evt.target.result
+          }
+          fetch('http://localhost:5000/cargaremedios', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(cuerpo),
+          })
+          .then(response => response.json())
+          .then(result => {
+              console.log('Success:', result);
+              actualizaremedio()
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
+      }
+      reader.onerror = function (evt) {
+      }
+  }
+}
+
+//MODIFICAR MEDICAMENTO
+function modificarmedicamento(){
+  let nombreR = document.getElementById("nameMEDI");
+  let nombreRN = document.getElementById("nameNMEDI");
+  let precio = document.getElementById("preMEDI");
+  let cantidad = document.getElementById("cantMEDI");
+  let descripcion = document.getElementById("descriMEDI");
+  
+
+  let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
       
         let reque = `{
-          "nombre":"${nombre.value}",
-          "apellido":"${apellido.value}",
-          "fechaNAC":"${fecha.value}",
-          "sexo":"${sexo.value}",
-          "usuario":"${usernew.value}",
-          "contraseña":"${contra.value}",
-          "telefono":"${telefono.value}"
+          "nRemedio":"${nombreRN.value}",
+          "pRemedio":"${precio.value}",
+          "dRemedio":"${descripcion.value}",
+          "cRemedio":"${cantidad.value}"
         }`
       
-        fetch('http://localhost:5000/pacientes/'+user.value, {
+        fetch('http://localhost:5000/remedios/'+nombreR.value, {
           method: 'PUT',
           headers,
           body: reque,
@@ -637,20 +939,53 @@ function modificarpaciente(){
         .then(response => response.json())
         .then(result => {
           console.log('Success:', result);
-          actualizarpaciente()
-          nombre.value=''
-          apellido.value=''
-          fecha.value=''
-          sexo.value=''
-          usernew.value=''
-          user.value=''
-          contra.value=''
-          telefono.value=''
+          actualizaremedio()
+          nombreR.value=''
+          nombreRN.value=''
+          precio.value=''
+          cantidad.value=''
+          descripcion.value=''
         })
         .catch(error => {
           console.error('Error:', error);
         });
 }
+
+//AGREGAR MEDICAMENTO
+function agregaremedio(){
+  let nombre = document.getElementById("nameMED");
+  let precio = document.getElementById("preMED");
+  let cantidad = document.getElementById("canMED")
+  let descripcion = document.getElementById("deMED");
+
+  fetch('http://localhost:5000/remedios', { 
+    method: 'POST',
+    headers,
+    body: `{
+        "nRemedio":"${nombre.value}",
+        "pRemedio":"${precio.value}",
+        "dRemedio":"${descripcion.value}",
+        "cRemedio":"${cantidad.value}"
+      }`,
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log('Success:', result);
+    actualizaremedio()
+    nombre.value=''
+    precio.value=''
+    cantidad.value=''
+    descripcion.value=''
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+
+
+
+
 
 //VER DATA PACIENTE
 function verpaciente(usuario){
@@ -666,12 +1001,6 @@ function verpaciente(usuario){
         document.getElementById("phonePACI").value = data.telefono;
     });
 }
-
-
-
-
-
-
 
 //NIMODO EL OJO
 function nimodo(){

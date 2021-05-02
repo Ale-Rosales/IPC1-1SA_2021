@@ -50,6 +50,25 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     left: 320px;
 }
 
+.titulo3{
+  font-weight: bold;
+  position:relative;
+  left: 280px;
+}
+
+.titulo4{
+  font-weight: bold;
+  position:relative;
+  left: 300px;
+}
+
+.titulo5{
+  font-weight: bold;
+  position:relative;
+  left: 335px;
+}
+
+
   .form {
      background: rgba(19, 35, 47, 0.9);
      border-top: 2px solid #ffffff;

@@ -28,7 +28,7 @@
   </div>
 </div>
 
-<header class="w3-container w3-purple w3-center" style="padding:128px 16px">
+<header class="w3-container w3-purple w3-center" style="padding:60px 16px">
   <h1 class="w3-margin w3-jumbo titulo">Administrador</h1>
 </header>
 
@@ -55,7 +55,7 @@
     <h4>Cargar Medicamentos</h4>
     </br>
     <input id="selectreme" type="file" class="w3-button w3-light-blue"/>
-    <button id="cargareme" class="lugar w3-button w3-light-blue">Cargar Archivo</button>
+    <button id="cargareme" class="lugar w3-button w3-light-blue" onclick="cargaremedios()">Cargar Archivo</button>
 
      </div>
   </div>
@@ -66,12 +66,12 @@
       <div class="w3-twothird">
         <h1 class="titulo">Visualización Pacientes</h1>
       </div>
-    </br>
-        <div id="tablapaciente"></div>
-      
+    </br></br>
+        <div id="tablapaciente" style="width: 900px; position: relative; left: 40px; height: 450px; overflow-y: scroll;"></div>
+      </br></br>
         <button class="botonreporte w3-button w3-khaki" onclick="PDFPaciente()">Reporte PDF</button>
       <!-- -->
-      </br></br>
+      </br></br></br>
         <div class="w3-twothird">
           <h1 class="titulo2">Modificar Paciente</h1>
         </div>
@@ -136,14 +136,14 @@
     <div class="w3-twothird">
       <h1 class="titulo">Visualización Doctores</h1>
     </div>
-  </br>
-    <div id="tabladoctor"></div>
-
+  </br></br>
+    <div id="tabladoctor" style="width: 1000px; position: relative; left: 15px; height: 450px; overflow-y: scroll;"></div>
+  </br></br>
     <button class="botonreporte w3-button w3-khaki" onclick="PDFDoctor()">Reporte PDF</button>
       <!-- -->
-        </br></br>
+        </br></br></br>
         <div class="w3-twothird">
-          <h1 class="titulo2">Modificar Doctor</h1>
+          <h1 class="titulo5">Modificar Doctor</h1>
         </div>
         </br></br></br>
           <div class="formCOLOR">
@@ -189,12 +189,19 @@
                   </div>
                 </div>
                                       </br>
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Especialidad</label>
+                    <input id="speDOC" type="text" autocomplete="off"/>
+                  </div>
+
                   <div class="field-wrap">
                     <label class="labelCOLOR">Teléfono</label>
                     <input id="phoneDOC" type="tel" autocomplete="off"/>
                   </div>
+                </div>
                                     </br>
-                <button class="button w3-button" onclick="">Modificar</button>
+                <button class="button w3-button" onclick="modificardoctor()">Modificar</button>
             </div> 
           </div> 
       <!-- -->
@@ -206,14 +213,14 @@
     <div class="w3-twothird">
       <h1 class="titulo">Visualización Enfermeras</h1>
     </div>
-  </br>
-    <div id="tablaenfermera"></div>
-
+  </br></br>
+    <div id="tablaenfermera" style="width: 900px; position: relative; left: 40px; height: 450px; overflow-y: scroll;"></div>
+  </br></br>
     <button class="botonreporte w3-button w3-khaki" onclick="PDFEnfermera()">Reporte PDF</button>
         <!-- -->
-          </br></br>
+          </br></br></br>
           <div class="w3-twothird">
-            <h1 class="titulo2">Modificar Enfermera</h1>
+            <h1 class="titulo4">Modificar Enfermera</h1>
           </div>
           </br></br></br>
             <div class="form">
@@ -264,7 +271,7 @@
                       <input id="phoneEN" type="tel" autocomplete="off"/>
                     </div>
                                       </br>
-                  <button class="button w3-button" onclick="">Modificar</button>
+                  <button class="button w3-button" onclick="modificarenfermera()">Modificar</button>
               </div> 
             </div> 
         <!-- -->
@@ -275,8 +282,87 @@
   <div class="w3-content">
     <div class="w3-twothird">
       <h1 class="titulo">Visualización Medicamentos</h1>
+    </br>
+    <div id='cardsc' style="width: 750px; position: relative; left: 100px; height: 500px; overflow-y: scroll;"></div>
     </div>
+    </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+    <button class="botonreporte w3-button w3-khaki" onclick="PDFMedicamento()">Reporte PDF</button>
+      <!-- -->
+        </br></br></br></br>
+        <div class="w3-twothird">
+          <h1 class="titulo3" style="position: relative; left: 5px;">Modificar Medicamento</h1>
+        </div>
+        </br></br></br>
+          <div class="formCOLOR" style="float:left; position: relative; top:10px;">
+            <div class="tab-content">
+              <div class="top-row">
+                <div class="field-wrap">
+                  <label class="labelCOLOR">Nombre</label>
+                  <input id="nameMEDI" type="text" required autocomplete="off"/>
+                </div>
 
+                <div class="field-wrap">
+                <label class="labelCOLOR">Nombre Nuevo</label>
+                    <input id="nameNMEDI" type="text" required autocomplete="off"/>
+                </div>
+              </div>
+                                        </br>
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Precio(Q)</label>
+                    <input id="preMEDI" type="text" required autocomplete="off" />
+                  </div>
+              
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Cantidad</label>
+                    <input id="cantMEDI" type="text" required autocomplete="off"/>
+                  </div>
+                </div>
+                                      </br>
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Descripción</label>
+                    <input id="descriMEDI" type="text" required autocomplete="off"/>
+                  </div>
+                                    </br>
+                <button class="button w3-button" onclick="modificarmedicamento()">Modificar</button>
+            </div> 
+          </div> 
+      <!-- -->
+
+      <!-- -->
+          </br></br>
+          <div class="w3-twothird">
+            <h1 class="titulo3" style="float:right; position: relative; bottom: 463px; left:310px;">Agregar Medicamento</h1>
+          </div>
+          </br></br></br>
+            <div class="formCOLOR" style="float:right; position: relative; bottom: 455px;">
+              <div class="tab-content">
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Nombre</label>
+                    <input id="nameMED" type="text" required autocomplete="off"/>
+                  </div>
+                                          </br>
+                  <div class="top-row">
+                    <div class="field-wrap">
+                      <label class="labelCOLOR">Precio(Q)</label>
+                      <input id="preMED" type="text" required autocomplete="off" />
+                    </div>
+                
+                    <div class="field-wrap">
+                      <label class="labelCOLOR">Cantidad</label>
+                      <input id="canMED" type="text" required autocomplete="off"/>
+                    </div>
+                  </div>
+                                        </br>
+                    <div class="field-wrap">
+                      <label class="labelCOLOR">Descripción</label>
+                      <input id="deMED" type="text" required autocomplete="off"/>
+                    </div>
+                                      </br>
+                  <button class="button w3-button" onclick="agregaremedio()">Agregar</button>
+              </div> 
+            </div> 
+        <!-- -->
   </div>
 </div>
 

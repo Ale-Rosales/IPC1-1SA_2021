@@ -1,17 +1,21 @@
 import json
 from Usuarios import Usuario
+from Medicamento import Remedio
 import re
 
 class Gestor:
 
     def __init__(self):
         self.usuarios = []
+        self.remedios = []
         self.usuarios.append(Usuario("Hebert", "Reyes", "SinFecha", "M", "admin", "1234", "SinEspecialidad", "SinTelefono", "Admin"))
+        """
         self.usuarios.append(Usuario("Carlos", "Rosales", "2000-04-15", "M", "carlosr", "1234", "SinEspecialidad", "SinTelefono", "Paciente"))
         self.usuarios.append(Usuario("Andrea", "Fernanda", "1998-04-08", "F", "andrefer", "1234", "Psicologa", "SinTelefono", "Paciente"))
         self.usuarios.append(Usuario("Hebert", "Reyes", "2021-04-08", "M", "admin", "1234", "SinEspecialidad", "SinTelefono", "Paciente"))
         self.usuarios.append(Usuario("Fernando", "Rosales", "SinFecha", "M", "fercho", "1234", "Cirujano", "SinTelefono", "Doctor"))
         self.usuarios.append(Usuario("Andrea", "Fernanda", "SinFecha", "F", "andrefer", "1234", "Psicologa", "SinTelefono", "Enfermera"))
+        """
 
 
     #INICIAR SESION
@@ -54,10 +58,9 @@ class Gestor:
     
     def actualizar_paciente(self,usuario,nombre,apellido,fechaNAC,sexo,usuarionuevo,contraseña,especialidad,telefono,tipousuario):
         for x in self.usuarios:
-            if x.tipousuario == "Paciente":
-                if x.usuario == usuario:
+            if x.tipousuario == "Paciente" and x.usuario == usuario:
                     self.usuarios[self.usuarios.index(x)] = Usuario(nombre,apellido,fechaNAC,sexo,usuarionuevo,contraseña,"SinEspecialidad",telefono,"Paciente")
-                return True
+                    return True
         return False
 
     def buscarpaciente(self, usuario):
@@ -92,12 +95,19 @@ class Gestor:
             i = 1
             while i < len(aux):
                 textdoc = re.split(',', aux[i])
-                self.crear_doctor(textdoc[0],textdoc[1],textdoc[2],textdoc[3],
+                self.crear_doctor(textdoc[0],textdoc[1],self.cambioFormato(textdoc[2]),textdoc[3],
                 textdoc[4],textdoc[5],textdoc[6],textdoc[7],"Doctor")
                 i = i+1
         except Exception as e:
             print(e)
     
+    def actualizar_doctor(self,usuario,nombre,apellido,fechaNAC,sexo,usuarionuevo,contraseña,especialidad,telefono,tipousuario):
+        for x in self.usuarios:
+            if x.tipousuario == "Doctor" and x.usuario == usuario:
+                self.usuarios[self.usuarios.index(x)] = Usuario(nombre,apellido,fechaNAC,sexo,usuarionuevo,contraseña,especialidad,telefono,"Doctor")
+                return True
+        return False
+
     #ENFERMERAS
     def crear_enfermera(self,nombre,apellido,fechaNAC,sexo,usuario,contraseña,especialidad,telefono,tipousuario):
         self.usuarios.append(Usuario(nombre,apellido,fechaNAC,sexo,usuario,contraseña,"SinEspecialidad",telefono,"Enfermera"))
@@ -123,14 +133,50 @@ class Gestor:
             i = 1
             while i < len(aux):
                 textdoc = re.split(',', aux[i])
-                self.crear_enfermera(textdoc[0],textdoc[1],textdoc[2],textdoc[3],
+                self.crear_enfermera(textdoc[0],textdoc[1],self.cambioFormato(textdoc[2]),textdoc[3],
                 textdoc[4],textdoc[5],"SinEspecialidad",textdoc[6],"Enfermera")
                 i = i+1
         except Exception as e:
             print(e)
 
-    #MEDICAMENTOS
+    def actualizar_enfermera(self,usuario,nombre,apellido,fechaNAC,sexo,usuarionuevo,contraseña,especialidad,telefono,tipousuario):
+        for x in self.usuarios:
+            if x.tipousuario == "Enfermera" and x.usuario == usuario:
+                self.usuarios[self.usuarios.index(x)] = Usuario(nombre,apellido,fechaNAC,sexo,usuarionuevo,contraseña,"SinEspecialidad",telefono,"Enfermera")
+                return True
+        return False
 
+    #MEDICAMENTOS
+    def crear_remedio(self,nRemedio,pRemedio,dRemedio,cRemedio):
+        self.remedios.append(Remedio(nRemedio,pRemedio,dRemedio,cRemedio))
+
+    def obtener_remedios(self):
+        return json.dumps([ob.__dict__ for ob in self.remedios])
+
+    def eliminar_remedio(self,nRemedio):
+        for x in self.remedios:
+            if x.nRemedio == nRemedio:
+                self.remedios.remove(x)
+                return True
+        return False
+
+    def actualizar_remedio(self,nombreR,nombreRN,pRemedio,dRemedio,cRemedio):
+        for x in self.remedios:
+            if x.nRemedio == nombreR:
+                self.remedios[self.remedios.index(x)]=Remedio(nombreRN,pRemedio,dRemedio,cRemedio)
+                return True
+        return False
+
+    def cargar_remedios(self,data):
+        try:
+            aux = re.split('\n',data)
+            i = 1
+            while i <len(aux):
+                retxt = re.split(',', aux[i])
+                self.crear_remedio(retxt[0],retxt[1],retxt[2],retxt[3])
+                i = i+1
+        except Exception as e:
+            print(e) 
 
     #CAMBIO DE FORMATO FECHA (PRUEBA)
     def cambioFormato(self,str):
