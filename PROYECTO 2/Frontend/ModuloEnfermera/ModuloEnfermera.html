@@ -17,14 +17,13 @@
   <div class="w3-bar w3-pink w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Enfermera</a>
-    <a href="#cita" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Solicitar Cita</a>
-    <a href="#comprar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Comprar Medicina</a>
-    <a href="#pedido" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Pedido</a>
-    <a href="../PaginaPrincipal/PaginaInicio.html"><button class="bottun w3-button w3-black w3-padding-large w3-large">Salir</button></a>
+    <a href="#cita" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Citas</a>
+    <a href="#cAcept" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Citas Aceptadas</a>
+    <a href="#factu" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Facturación</a>
+    <a href="#modi" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" onclick="verenfermera(localStorage.getItem('usuario'))">Modificar Perfil</a>
+    <button class="bottun w3-button w3-black w3-padding-large w3-large" onclick="cerrar()">Salir</button>
   </div>
 </div>
-
-w3-grey
 
 <header class="w3-container w3-pink w3-center" style="padding:60px 16px">
   <h1 class="w3-margin w3-jumbo titulo">Enfermera</h1>
@@ -33,27 +32,112 @@ w3-grey
 <div class="w3-row-padding w3-padding-64 w3-container" id="cita">
   <div class="w3-content">
     <div class="w3-twothird">
-      <h1 class="titulo">Citas Pendientes</h1>
+      <h1 class="titulo">Listado de Citas</h1>
+    </br>
+      <div id='cardsc' style="width: 750px; position: relative; left: 100px; height: 500px; overflow-y: scroll;"></div>
 
     </div>
   </div>
 </div>
 
-<div class="w3-row-padding w3-padding-64 w3-container w3-grey" id="comprar">
+<div class="w3-row-padding w3-padding-64 w3-container w3-grey" id="cAcept">
     <div class="w3-content">
       <div class="w3-twothird">
         <h1 class="titulo">Citas Aceptadas</h1>
       </div>
+    </br>
+    <div id='cardsc2' style="width: 500px; position: relative; left: 250px; height: 500px; overflow-y: scroll;"></div>
 
     </div>
 </div>
 
-<div class="w3-row-padding w3-padding-64 w3-container" id="pedido">
+<div class="w3-row-padding w3-padding-64 w3-container" id="factu">
+  <div class="w3-content">
+      <div class="w3-twothird">
+        <h1 class="titulo">Generar Factura</h1>
+      <br>
+        <h5>Fecha:</h5>
+        <input type="date" id="pFecha" name="fechaCite" style="position:relative; left: 0px;"/>
+      </br></br>
+        <h5>Usuario Paciente:</h5>
+        <input id="nPaciente" type="text" style="color: black;"/>
+      </br>
+        <h5>Doctor:</h5>
+        <input id="dName" type="text" style="color: black;"/>
+      </br>
+        <h5>Costo Operación(Q):</h5>
+        <input id="cOpe" type="text" style="color: black;"/>
+      </br>
+        <h5>Costo Internado(Q):</h5>
+        <input id="cInte" type="text" style="color: black;"/>
+      </br>
+        <h5>Total(Q):</h5>
+        <input id="total" type="text" style="color: black;"/>
+      </br>
+      </br>
+      <button class="bottun w3-button w3-black w3-padding-large w3-large">Generar</button>
+      </div>
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container w3-grey" id="modi">
   <div class="w3-content">
     <div class="w3-twothird">
-      <h1 class="titulo">Generar Factura</h1>
+      <h1 class="titulo">Modificar Perfil</h1>
     </div>
+  </br></br></br></br>
+            <div class="form">
+              <div class="tab-content">
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Usuario</label>
+                    <input id="usserEN" type="text" required autocomplete="off"/>
+                  </div>
 
+                  <div class="field-wrap">
+                  <label class="labelCOLOR">Usuario Nuevo</label>
+                      <input id="usserNEN" type="text" required autocomplete="off"/>
+                  </div>
+                </div>
+                                          </br>
+                  <div class="top-row">
+                    <div class="field-wrap">
+                      <label class="labelCOLOR">Nombre</label>
+                      <input id="nameEN" type="text" required autocomplete="off" />
+                    </div>
+                
+                    <div class="field-wrap">
+                      <label class="labelCOLOR">Apellido</label>
+                      <input id="lastnameEN" type="text" required autocomplete="off"/>
+                    </div>
+                  </div>
+                                        </br>
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Fecha de nacimiento</label> </br></br>
+                    <input id="borndateEN" type="date" id="fecha" name="fechaNac" required> 
+                  </div>
+                                      </br>
+                  <div class="top-row">
+                    <div class="field-wrap">
+                      <label class="labelCOLOR">Sexo</label>
+                      <input id="genderEN" type="text" required autocomplete="off"/>
+                    </div>
+                    
+                    <div class="field-wrap">
+                      <label class="labelCOLOR">Contraseña</label>
+                      <input id="passEN" type="password" required autocomplete="off"/>
+                    </div>
+                  </div>
+                                        </br>
+                    <div class="field-wrap">
+                      <label class="labelCOLOR">Teléfono</label>
+                      <input id="phoneEN" type="tel" autocomplete="off"/>
+                    </div>
+                                      </br>
+                  <button class="button w3-button" onclick="modificarenfermera()">Modificar</button>
+              </div> 
+            </div> 
+        <!-- -->
   </div>
 </div>
 

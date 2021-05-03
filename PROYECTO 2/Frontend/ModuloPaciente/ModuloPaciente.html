@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="./style.css">
+  <!-- <script>alert("Tu usuario es: " + localStorage.getItem("usuario"))</script> -->
 </head>
 
 <body>
@@ -18,9 +19,11 @@
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Paciente</a>
     <a href="#cita" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Solicitar Cita</a>
+    <a href="#estado" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Cita</a>
     <a href="#comprar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Comprar Medicina</a>
     <a href="#pedido" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Pedido</a>
-    <a href="../PaginaPrincipal/PaginaInicio.html"><button class="bottun w3-button w3-black w3-padding-large w3-large">Salir</button></a>
+    <a href="#perfil" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" onclick="verpaciente(localStorage.getItem('usuario'))">Modificar Perfil</a>
+    <button class="bottun w3-button w3-black w3-padding-large w3-large" onclick="cerrar()">Salir</button>
   </div>
 </div>
 
@@ -34,21 +37,33 @@
       <h1 class="titulo">Solicitar Cita</h1>
     <br>
       <h5>Fecha:</h5>
-      <input type="date" id="pFecha" name="fechaCite"/>
+      <input type="date" id="ciFecha" name="fechaCite" style="position:relative; left: 0px;"/>
     </br>
       <h5 class="hora">Hora:</h5>
-      <input id="nPaciente" style="width: 100px; text-align: center;"  type="time"/>
+      <input id="ciHora" type="time"  style="width: 120px; text-align: center;"  />
     </br>
       <h5>Motivo:</h5>
-      <input id="pDescri" type="text" style="WIDTH: 450px; HEIGHT: 55px;"/>
+      <input id="ciMoti" type="text" style="WIDTH: 450px; HEIGHT: 55px; color: black;"/>
     </br>
     </br>
-    <button class="bottun w3-button w3-black w3-padding-large w3-large">Pedir Cita</button>
+    <button class="bottun w3-button w3-black w3-padding-large w3-large" onclick="crearcita()">Pedir Cita</button>
     </div>
   </div>
 </div>
 
-<div class="w3-row-padding w3-padding-64 w3-container w3-light-blue" id="comprar">
+<div class="w3-row-padding w3-padding-64 w3-container w3-light-blue" id="estado">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1 class="titulo">Estado de la Cita</h1>
+    </div>
+    </br></br></br></br>
+    <div id='cardsc' style="width: 300px; position: relative; left: 350px;"></div>
+  </br>
+    <button class="w3-button w3-black w3-padding-large w3-large" onclick="verestado(localStorage.getItem('usuario'))">Verificar Estado</button>
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="comprar">
     <div class="w3-content">
       <div class="w3-twothird">
         <h1 class="titulo">Comprar Medicina</h1>
@@ -58,12 +73,73 @@
     </div>
 </div>
 
-<div class="w3-row-padding w3-padding-64 w3-container" id="pedido">
+<div class="w3-row-padding w3-padding-64 w3-container  w3-light-blue" id="pedido">
   <div class="w3-content">
     <div class="w3-twothird">
       <h1 class="titulo">Pedido</h1>
     </div>
 
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="perfil">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1 class="titulo">Modificar Perfil</h1>
+    </div>
+  </br></br></br></br>
+        <div class="form">
+          <div class="tab-content">
+            <div class="top-row">
+              <div class="field-wrap">
+                <label class="labelCOLOR">Usuario</label>
+                <input id="usserPACI" type="text" required autocomplete="off"/>
+              </div>
+
+              <div class="field-wrap">
+              <label class="labelCOLOR">Usuario Nuevo</label>
+                  <input id="usserNPACI" type="text" required autocomplete="off"/>
+              </div>
+            </div>
+                                      </br>
+              <div class="top-row">
+                <div class="field-wrap">
+                  <label class="labelCOLOR">Nombre</label>
+                  <input id="namePACI" type="text" required autocomplete="off" />
+                </div>
+            
+                <div class="field-wrap">
+                  <label class="labelCOLOR">Apellido</label>
+                  <input id="lastnamePACI" type="text" required autocomplete="off"/>
+                </div>
+              </div>
+                                    </br>
+              <div class="field-wrap">
+                <label class="labelCOLOR">Fecha de nacimiento</label> </br></br>
+                <input id="borndatePACI" type="date" id="fecha" name="fechaNac" required> 
+              </div>
+                                  </br>
+              <div class="top-row">
+                <div class="field-wrap">
+                  <label class="labelCOLOR">Sexo</label>
+                  <input id="genderPACI" type="text" required autocomplete="off"/>
+                </div>
+                
+                <div class="field-wrap">
+                  <label class="labelCOLOR">Contraseña</label>
+                  <input id="passPACI" type="password" required autocomplete="off"/>
+                </div>
+              </div>
+                                    </br>
+                <div class="field-wrap">
+                  <label class="labelCOLOR">Teléfono</label>
+                  <input id="phonePACI" type="tel" autocomplete="off"/>
+                </div>
+                                  </br>
+              <button class="button w3-button" onclick="modificarpaciente()">Modificar</button>
+          </div> 
+        </div>
+<!-- -->
   </div>
 </div>
 

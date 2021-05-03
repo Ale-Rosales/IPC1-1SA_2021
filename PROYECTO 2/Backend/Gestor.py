@@ -1,6 +1,7 @@
 import json
 from Usuarios import Usuario
 from Medicamento import Remedio
+from Citas import Cita
 import re
 
 class Gestor:
@@ -8,9 +9,14 @@ class Gestor:
     def __init__(self):
         self.usuarios = []
         self.remedios = []
+        self.citas = []
+        #self.aceptadas = []
         self.usuarios.append(Usuario("Hebert", "Reyes", "SinFecha", "M", "admin", "1234", "SinEspecialidad", "SinTelefono", "Admin"))
+        self.usuarios.append(Usuario("Alejandro", "Rosales", "2000-04-15", "M", "alejo", "123", "SinEspecialidad", "SinTelefono", "Paciente"))
+        self.usuarios.append(Usuario("Andrea", "Fernanda", "SinFecha", "F", "andrea", "123", "SinEspecialidad", "SinTelefono", "Enfermera"))
+        self.usuarios.append(Usuario("Hebert", "Reyes", "2021-04-08", "M", "herb", "123","Corazón", "SinTelefono", "Doctor"))
         """
-        self.usuarios.append(Usuario("Carlos", "Rosales", "2000-04-15", "M", "carlosr", "1234", "SinEspecialidad", "SinTelefono", "Paciente"))
+        self.usuarios.append(Usuario("Alejandro", "Rosales", "2000-04-15", "M", "alejo", "123", "SinEspecialidad", "SinTelefono", "Paciente"))
         self.usuarios.append(Usuario("Andrea", "Fernanda", "1998-04-08", "F", "andrefer", "1234", "Psicologa", "SinTelefono", "Paciente"))
         self.usuarios.append(Usuario("Hebert", "Reyes", "2021-04-08", "M", "admin", "1234", "SinEspecialidad", "SinTelefono", "Paciente"))
         self.usuarios.append(Usuario("Fernando", "Rosales", "SinFecha", "M", "fercho", "1234", "Cirujano", "SinTelefono", "Doctor"))
@@ -108,6 +114,13 @@ class Gestor:
                 return True
         return False
 
+    def buscardoctor(self,usuario):
+        for x in self.usuarios:
+            if x.tipousuario == "Doctor":
+                if x.usuario == usuario:
+                    return x.__dict__
+        return False
+
     #ENFERMERAS
     def crear_enfermera(self,nombre,apellido,fechaNAC,sexo,usuario,contraseña,especialidad,telefono,tipousuario):
         self.usuarios.append(Usuario(nombre,apellido,fechaNAC,sexo,usuario,contraseña,"SinEspecialidad",telefono,"Enfermera"))
@@ -144,6 +157,13 @@ class Gestor:
             if x.tipousuario == "Enfermera" and x.usuario == usuario:
                 self.usuarios[self.usuarios.index(x)] = Usuario(nombre,apellido,fechaNAC,sexo,usuarionuevo,contraseña,"SinEspecialidad",telefono,"Enfermera")
                 return True
+        return False
+
+    def buscarenfermera(self, usuario):
+        for x in self.usuarios:
+            if x.tipousuario == "Enfermera":
+                if x.usuario == usuario:
+                    return x.__dict__
         return False
 
     #MEDICAMENTOS
@@ -183,3 +203,38 @@ class Gestor:
         aux = str.split('/')
         cambio = aux[2] + '-' + aux[1] + '-' + aux[0]
         return cambio
+
+    #CITAS
+    def crear_cita(self,USpaciente,fecha,hora,motivo,nomDoc,estado):
+        self.citas.append(Cita(USpaciente,fecha,hora,motivo,nomDoc,estado))
+
+    def obtener_citas(self):
+        return json.dumps([ob.__dict__ for ob in self.citas])
+
+    def rechazar_cita(self,paciente,USpaciente,fecha,hora,motivo,nomDoc,estadonuevo):
+        for x in self.citas:
+            if x.USpaciente == paciente:
+                self.citas[self.citas.index(x)] = Cita(USpaciente,fecha,hora,motivo,"SinDoctor","Rechazada")
+                return True
+        return False
+
+    def aceptar_cita(self,paciente,USpaciente,fecha,hora,motivo,nomDoc,estadonuevo):
+        for x in self.citas:
+            if x.USpaciente == paciente:
+                self.citas[self.citas.index(x)] = Cita(USpaciente,fecha,hora,motivo,nomDoc,"Aceptada")
+                return True
+        return False
+
+    def aceptadas_citas(self):
+        aceptadas = []
+        for x in self.citas:
+            if x.estado == "Aceptada":
+                aceptadas.append(x)
+        return json.dumps([ob.__dict__ for ob in aceptadas])
+
+    def buscarcitas(self, usuario):
+        for x in self.citas:
+            if x.USpaciente == usuario:
+                return x.__dict__
+        return False
+    

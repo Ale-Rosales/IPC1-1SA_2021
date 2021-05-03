@@ -92,6 +92,10 @@ def actualizar_doctores(usuario):
         return '{"data":"Actualizado"}'
     return '{"data":"Error"}'
 
+@app.route('/doctores/<usuario>')
+def buscardoctor(usuario):
+    return gestor.buscardoctor(usuario)
+
 #ENFERMERAS
 @app.route('/enfermeras',methods=['POST'])
 def registrarenfermeras():
@@ -124,6 +128,9 @@ def actualizar_enfermera(usuario):
         return '{"data":"Actualizado"}'
     return '{"data":"Error"}'
 
+@app.route('/enfermeras/<usuario>')
+def buscarenfermera(usuario):
+    return gestor.buscarenfermera(usuario)
 
 #MEDICAMENTOS
 @app.route('/obtenermedicamento')
@@ -155,10 +162,38 @@ def crea_remedio():
     gestor.crear_remedio(dato['nRemedio'],dato['pRemedio'],dato['dRemedio'],dato['cRemedio'])
     return '{"data":"Creado"}'
 
+#CITAS PACIENTE
+@app.route('/citas',methods=['POST'])
+def crear_cita():
+    dato = request.json
+    gestor.crear_cita(dato['USpaciente'],dato['fecha'],dato['hora'],dato['motivo'],'SinDoctor',dato['estado'])
+    return '{"data":"Creada"}'
 
+@app.route('/obtenercitas')
+def obtener_citas():
+    return gestor.obtener_citas()
 
+@app.route('/citas/<USpaciente>',methods=['PUT'])
+def aceptar_cita(USpaciente):
+    dato = request.json
+    if gestor.aceptar_cita(USpaciente,dato['USpaciente'],dato['fecha'],dato['hora'],dato['motivo'],dato['nomDoc'],'Aceptada'):
+        return '{"data":"Exitoso"}'
+    return '{"data":"Error"}'
 
+@app.route('/rechazos/<USpaciente>',methods=['PUT'])
+def rechazo_cita(USpaciente):
+    dato = request.json
+    if gestor.rechazar_cita(USpaciente,dato['USpaciente'],dato['fecha'],dato['hora'],dato['motivo'],'SinDoctor','Rechazada'):
+        return '{"data":"Exitoso"}'
+    return '{"data":"Error"}'
 
+@app.route('/aceptadas')
+def obtener_aceptadas():
+    return gestor.aceptadas_citas()
+
+@app.route('/citas/<USpaciente>')
+def buscarcita(USpaciente):
+    return gestor.buscarcitas(USpaciente)
 
 
 

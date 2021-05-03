@@ -60,16 +60,20 @@ function IniciarSesion(){
   .then(response => response.json())
   .then(data => {
       if(data.tipousuario == "Admin"){
-        alert(`Bienvenido ${data.usuario}`)
+        alert(`Bienvenido: ${data.usuario}`)
         window.location.href='../ModuloAdmin/ModuloAdmin.html'
       }else if(data.tipousuario == "Paciente"){
-        alert(`Bienvenido ${data.usuario}`)
+        alert(`Bienvenido: ${data.usuario}`)
+        localStorage.setItem("usuario",data.usuario)
         window.location.href='../ModuloPaciente/ModuloPaciente.html'
       }else if(data.tipousuario == "Doctor"){
-        alert(`Bienvenido ${data.usuario}`)
+        alert(`Bienvenido: ${data.usuario}`)
+        localStorage.setItem("usuario",data.usuario)
+        localStorage.setItem("nombre",data.nombre)
         window.location.href='../ModuloDoctor/ModuloDoctor.html'
       }else if(data.tipousuario == "Enfermera"){
-        alert(`Bienvenido ${data.usuario}`)
+        alert(`Bienvenido: ${data.usuario}`)
+        localStorage.setItem("usuario",data.usuario)
         window.location.href='../ModuloEnfermera/ModuloEnfermera.html'
       }else if(data.usuario == "false"){
         alert('Verifique sus Credenciales')

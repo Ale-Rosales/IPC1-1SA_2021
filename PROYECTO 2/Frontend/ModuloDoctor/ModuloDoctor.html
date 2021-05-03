@@ -17,13 +17,14 @@
   <div class="w3-bar w3-green w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Doctor</a>
-    <a href="#receta" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Receta</a>
+    <a href="#receta" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Recetas</a>
     <a href="#citas" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Citas</a>
-    <a href="../PaginaPrincipal/PaginaInicio.html"><button class="bottun w3-button w3-black w3-padding-large w3-large">Salir</button></a>
+    <a href="#modi" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" onclick="verdoctor(localStorage.getItem('usuario'))">Modificar Perfil</a>
+    <button class="bottun w3-button w3-black w3-padding-large w3-large" onclick="cerrar()">Salir</button></a>
   </div>
 </div>
 
-<header class="w3-container w3-green w3-center" style="padding:60px 16px"">
+<header class="w3-container w3-green w3-center" style="padding:60px 16px">
   <h1 class="w3-margin w3-jumbo titulo">Doctor</h1>
 </header>
 
@@ -33,16 +34,16 @@
         <h1 class="titulo">Recetar</h1>
       <br>
         <h5>Fecha:</h5>
-        <input type="date" id="pFecha" name="fechaCite"/>
-      </br>
-        <h5>Nombre Paciente:</h5>
-        <input id="nPaciente" type="text"/>
+        <input type="date" id="pFecha" name="fechaCite" style="position:relative; left: 0px;"/>
+      </br></br>
+        <h5>Usuario Paciente:</h5>
+        <input id="nPaciente" type="text" style="color: black;"/>
       </br>
         <h5>Padecimiento:</h5>
-        <input id="pPadeci" type="text"/>
+        <input id="pPadeci" type="text" style="color: black;"/>
       </br>
         <h5>Descripción:</h5>
-        <input id="pDescri" type="text" style="WIDTH: 450px; HEIGHT: 55px;"/>
+        <input id="pDescri" type="text" style="WIDTH: 450px; HEIGHT: 55px; color: black;"/>
       </br>
       </br>
       <button class="bottun w3-button w3-black w3-padding-large w3-large">Enviar Receta</button>
@@ -54,9 +55,78 @@
   <div class="w3-content">
     <div class="w3-twothird">
       <h1 class="titulo">Citas</h1>
- 
     </div>
+  </br>
+  <div id='cardsc' style="width: 750px; position: relative; left: 100px; height: 500px; overflow-y: scroll;"></div>
 
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container" id="modi">
+  <div class="w3-content">
+    <div class="w3-twothird">
+      <h1 class="titulo">Modificar Perfil</h1>
+    </div>
+        </br></br></br></br>
+          <div class="form">
+            <div class="tab-content">
+              <div class="top-row">
+                <div class="field-wrap">
+                  <label class="labelCOLOR">Usuario</label>
+                  <input id="usserDOC" type="text" required autocomplete="off"/>
+                </div>
+
+                <div class="field-wrap">
+                <label class="labelCOLOR">Usuario Nuevo</label>
+                    <input id="usserNDOC" type="text" required autocomplete="off"/>
+                </div>
+              </div>
+                                        </br>
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Nombre</label>
+                    <input id="nameDOC" type="text" required autocomplete="off" />
+                  </div>
+              
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Apellido</label>
+                    <input id="lastnameDOC" type="text" required autocomplete="off"/>
+                  </div>
+                </div>
+                                      </br>
+                <div class="field-wrap">
+                  <label class="labelCOLOR">Fecha de nacimiento</label> </br></br>
+                  <input id="borndateDOC" type="date" id="fecha" name="fechaNac" required> 
+                </div>
+                                    </br>
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Sexo</label>
+                    <input id="genderDOC" type="text" required autocomplete="off"/>
+                  </div>
+                  
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Contraseña</label>
+                    <input id="passDOC" type="password" required autocomplete="off"/>
+                  </div>
+                </div>
+                                      </br>
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Especialidad</label>
+                    <input id="speDOC" type="text" autocomplete="off"/>
+                  </div>
+
+                  <div class="field-wrap">
+                    <label class="labelCOLOR">Teléfono</label>
+                    <input id="phoneDOC" type="tel" autocomplete="off"/>
+                  </div>
+                </div>
+                                    </br>
+                <button class="button w3-button" onclick="modificardoctor()">Modificar</button>
+            </div> 
+          </div> 
+      <!-- -->
   </div>
 </div>
 
