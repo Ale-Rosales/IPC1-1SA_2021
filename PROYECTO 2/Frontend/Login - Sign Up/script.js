@@ -2,7 +2,7 @@
 let headers = new Headers()
 headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
-headers.append('Access-Control-Allow-Origin', 'http://localhost:5000');
+headers.append('Access-Control-Allow-Origin', 'http://35.184.158.26:5000');
 headers.append('Access-Control-Allow-Credentials', 'true');
 headers.append('GET', 'POST', 'OPTIONS','PUT','DELETE');
 
@@ -56,7 +56,7 @@ function IniciarSesion(){
     return
   }
 
-  fetch(`http://localhost:5000/login/${usuario.value}/${pass.value}`)
+  fetch(`http://35.184.158.26:5000/login/${usuario.value}/${pass.value}`)
   .then(response => response.json())
   .then(data => {
       if(data.tipousuario == "Admin"){
@@ -112,7 +112,7 @@ function CrearUsuario(){
     return
   }
 
-  fetch('http://localhost:5000/pacientes',
+  fetch('http://35.184.158.26:5000/pacientes',
   {
       method:'POST',
       headers,

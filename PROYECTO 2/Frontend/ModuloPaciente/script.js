@@ -2,7 +2,7 @@
 let headers = new Headers()
 headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
-headers.append('Access-Control-Allow-Origin', 'http://localhost:5000');
+headers.append('Access-Control-Allow-Origin', 'http://35.184.158.26:5000');
 headers.append('Access-Control-Allow-Credentials', 'true');
 headers.append('GET', 'POST', 'OPTIONS','PUT','DELETE');
 
@@ -25,7 +25,7 @@ function cerrar(){
 
 //VER DATA PACIENTE
 function verpaciente(usuario){
-  fetch('http://localhost:5000/pacientes/'+usuario)
+  fetch('http://35.184.158.26:5000/pacientes/'+usuario)
   .then(response => response.json())
   .then(data =>{
       document.getElementById("namePACI").value = data.nombre;
@@ -63,7 +63,7 @@ function modificarpaciente(){
         "telefono":"${telefono.value}"
       }`
     
-      fetch('http://localhost:5000/pacientes/'+user.value, {
+      fetch('http://35.184.158.26:5000/pacientes/'+user.value, {
         method: 'PUT',
         headers,
         body: reque,
@@ -94,7 +94,7 @@ function crearcita(){
   let hora = document.getElementById("ciHora");
   let motivo = document.getElementById("ciMoti")
 
-  fetch('http://localhost:5000/citas', { 
+  fetch('http://35.184.158.26:5000/citas', { 
     method: 'POST',
     headers,
     body: `{
@@ -122,7 +122,7 @@ function crearcita(){
 //ESTADO CITA
 function verestado(usuario){
   let text="";
-  fetch('http://localhost:5000/citas/'+usuario)
+  fetch('http://35.184.158.26:5000/citas/'+usuario)
   .then(response => response.json())
   .then(data =>{
     text+= `
@@ -141,7 +141,7 @@ function verestado(usuario){
 
 //MOSTRAR MEDICAMENTOS
 let text="";
-fetch('http://localhost:5000/obtenermedicamento')
+fetch('http://35.184.158.26:5000/obtenermedicamento')
 .then(response => response.json())
 .then(data =>{
     var i;
@@ -167,7 +167,7 @@ fetch('http://localhost:5000/obtenermedicamento')
 //ACTUALIZAR MEDICAMENTOS
 function actualizaremedio(){
   let text="";
-  fetch('http://localhost:5000/obtenermedicamento')
+  fetch('http://35.184.158.26:5000/obtenermedicamento')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -204,7 +204,7 @@ function comprarmedicamentos(nRemedio){
   </thead>
   <tbody>`
 
-  fetch('http://localhost:5000/compras/'+nRemedio)
+  fetch('http://35.184.158.26:5000/compras/'+nRemedio)
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -235,7 +235,7 @@ let text4=""
   </thead>
   <tbody>`
 
-  fetch('http://localhost:5000/obtenercompras')
+  fetch('http://35.184.158.26:5000/obtenercompras')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -266,7 +266,7 @@ function carritonuevo(){
   </thead>
   <tbody>`
 
-  fetch('http://localhost:5000/obtenercompras')
+  fetch('http://35.184.158.26:5000/obtenercompras')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -288,7 +288,7 @@ function carritonuevo(){
 
 //LIMPIAR CARRITO
 function carritolimpio(){
-  fetch('http://localhost:5000/compras',{
+  fetch('http://35.184.158.26:5000/compras',{
       method:'DELETE'
   })
   .then(res => res.text())
@@ -322,7 +322,7 @@ function convertirDataCompra(nRemedio){
 }
 
 function PDFCompra(){
-  fetch('http://localhost:5000/obtenercompras')
+  fetch('http://35.184.158.26:5000/obtenercompras')
   .then(response => response.json())
   .then(data=>{
     //Declarando los headers

@@ -2,7 +2,7 @@
 let headers = new Headers()
 headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
-headers.append('Access-Control-Allow-Origin', 'http://localhost:5000');
+headers.append('Access-Control-Allow-Origin', 'http://35.184.158.26:5000');
 headers.append('Access-Control-Allow-Credentials', 'true');
 headers.append('GET', 'POST', 'OPTIONS','PUT','DELETE');
 
@@ -46,7 +46,7 @@ function convertirDataPaciente(usuario){
 }
 
 function PDFPaciente(){
-  fetch('http://localhost:5000/obtenerpacientes')
+  fetch('http://35.184.158.26:5000/obtenerpacientes')
   .then(response => response.json())
   .then(data=>{
     //Declarando los headers
@@ -110,7 +110,7 @@ function convertirDataDoctor(usuario){
 }
 
 function PDFDoctor(){
-  fetch('http://localhost:5000/obtenerdoctores')
+  fetch('http://35.184.158.26:5000/obtenerdoctores')
   .then(response => response.json())
   .then(data=>{
     //Declarando los headers
@@ -174,7 +174,7 @@ function convertirDataEnfe(usuario){
 }
 
 function PDFEnfermera(){
-  fetch('http://localhost:5000/obtenerenfermeras')
+  fetch('http://35.184.158.26:5000/obtenerenfermeras')
   .then(response => response.json())
   .then(data=>{
     //Declarando los headers
@@ -235,7 +235,7 @@ function convertirDataMedicamentos(remedio){
 }
 
 function PDFMedicamento(){
-  fetch('http://localhost:5000/obtenermedicamento')
+  fetch('http://35.184.158.26:5000/obtenermedicamento')
   .then(response => response.json())
   .then(data=>{
     //Declarando los headers
@@ -284,7 +284,7 @@ text2 = `<table class="table" id="tablapaciente" style="margin:40px">
 </thead>
 <tbody>`
 
-fetch('http://localhost:5000/obtenerpacientes')
+fetch('http://35.184.158.26:5000/obtenerpacientes')
 .then(response => response.json())
 .then(data =>{
     var i;
@@ -329,7 +329,7 @@ function actualizarpaciente(){
   </thead>
   <tbody>`
   
-  fetch('http://localhost:5000/obtenerpacientes')
+  fetch('http://35.184.158.26:5000/obtenerpacientes')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -358,7 +358,7 @@ function actualizarpaciente(){
 
 //ELIMINAR PACIENTE
 function eliminarpaciente(usuario){
-  fetch('http://localhost:5000/pacientes/'+usuario,{
+  fetch('http://35.184.158.26:5000/pacientes/'+usuario,{
       method:'DELETE'
   })
   .then(res => res.text())
@@ -379,7 +379,7 @@ function cargarpaciente(){
           }
 
           console.log(JSON.stringify(cuerpo))
-          fetch('http://localhost:5000/cargapacientes', {
+          fetch('http://35.184.158.26:5000/cargapacientes', {
           method: 'POST',
           headers,
           body: JSON.stringify(cuerpo),
@@ -425,7 +425,7 @@ function modificarpaciente(){
         "telefono":"${telefono.value}"
       }`
     
-      fetch('http://localhost:5000/pacientes/'+user.value, {
+      fetch('http://35.184.158.26:5000/pacientes/'+user.value, {
         method: 'PUT',
         headers,
         body: reque,
@@ -468,7 +468,7 @@ text3 = `<table class="table" id="tabladoctor" style="margin:40px">
 </thead>
 <tbody>`
 
-fetch('http://localhost:5000/obtenerdoctores')
+fetch('http://35.184.158.26:5000/obtenerdoctores')
 .then(response => response.json())
 .then(data =>{
     var i;
@@ -515,7 +515,7 @@ function actualizardoctor(){
   </thead>
   <tbody>`
 
-  fetch('http://localhost:5000/obtenerdoctores')
+  fetch('http://35.184.158.26:5000/obtenerdoctores')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -545,7 +545,7 @@ function actualizardoctor(){
 
 //ELIMINAR DOCTOR
 function eliminardoctor(usuario){
-  fetch('http://localhost:5000/doctores/'+usuario,{
+  fetch('http://35.184.158.26:5000/doctores/'+usuario,{
       method:'DELETE'
   })
   .then(res => res.text())
@@ -567,7 +567,7 @@ function cargardoctor(){
           }
 
           console.log(JSON.stringify(cuerpo))
-          fetch('http://localhost:5000/cargadoctores', {
+          fetch('http://35.184.158.26:5000/cargadoctores', {
           method: 'POST',
           headers,
           body: JSON.stringify(cuerpo),
@@ -614,7 +614,7 @@ function modificardoctor(){
         "telefono":"${telefono.value}"
       }`
     
-      fetch('http://localhost:5000/doctores/'+user.value, {
+      fetch('http://35.184.158.26:5000/doctores/'+user.value, {
         method: 'PUT',
         headers,
         body: reque,
@@ -657,7 +657,7 @@ text4 = `<table class="table" id="tablaenfermera" style="margin:40px">
 </thead>
 <tbody>`
 
-fetch('http://localhost:5000/obtenerenfermeras')
+fetch('http://35.184.158.26:5000/obtenerenfermeras')
 .then(response => response.json())
 .then(data =>{
     var i;
@@ -702,7 +702,7 @@ function actualizarenfermera(){
   </thead>
   <tbody>`
 
-  fetch('http://localhost:5000/obtenerenfermeras')
+  fetch('http://35.184.158.26:5000/obtenerenfermeras')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -731,7 +731,7 @@ function actualizarenfermera(){
 
 //ELIMINAR ENFERMERA
 function eliminarenfermera(usuario){
-  fetch('http://localhost:5000/enfermeras/'+usuario,{
+  fetch('http://35.184.158.26:5000/enfermeras/'+usuario,{
       method:'DELETE'
   })
   .then(res => res.text())
@@ -753,7 +753,7 @@ function cargarenfermera(){
           }
 
           console.log(JSON.stringify(cuerpo))
-          fetch('http://localhost:5000/cargaenfermeras', {
+          fetch('http://35.184.158.26:5000/cargaenfermeras', {
           method: 'POST',
           headers,
           body: JSON.stringify(cuerpo),
@@ -799,7 +799,7 @@ function modificarenfermera(){
         "telefono":"${telefono.value}"
       }`
     
-      fetch('http://localhost:5000/enfermeras/'+user.value, { //FALTA CAMBIARLO
+      fetch('http://35.184.158.26:5000/enfermeras/'+user.value, { //FALTA CAMBIARLO
         method: 'PUT',
         headers,
         body: reque,
@@ -825,7 +825,7 @@ function modificarenfermera(){
 
 //MOSTRAR REMEDIOS
 let text="";
-fetch('http://localhost:5000/obtenermedicamento')
+fetch('http://35.184.158.26:5000/obtenermedicamento')
 .then(response => response.json())
 .then(data =>{
     var i;
@@ -850,7 +850,7 @@ fetch('http://localhost:5000/obtenermedicamento')
 //ACTUALIZAR REMEDIOS
 function actualizaremedio(){
   let text="";
-  fetch('http://localhost:5000/obtenermedicamento')
+  fetch('http://35.184.158.26:5000/obtenermedicamento')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -875,7 +875,7 @@ function actualizaremedio(){
 
 //ELIMINAR REMEDIOS
 function eliminaremedio(nRemedio){
-  fetch('http://localhost:5000/remedios/'+nRemedio,{
+  fetch('http://35.184.158.26:5000/remedios/'+nRemedio,{
       method:'DELETE'
   })
   .then(res => res.text())
@@ -894,7 +894,7 @@ function cargaremedios(){
           let cuerpo = {
               data:evt.target.result
           }
-          fetch('http://localhost:5000/cargaremedios', {
+          fetch('http://35.184.158.26:5000/cargaremedios', {
           method: 'POST',
           headers,
           body: JSON.stringify(cuerpo),
@@ -933,7 +933,7 @@ function modificarmedicamento(){
           "cRemedio":"${cantidad.value}"
         }`
       
-        fetch('http://localhost:5000/remedios/'+nombreR.value, {
+        fetch('http://35.184.158.26:5000/remedios/'+nombreR.value, {
           method: 'PUT',
           headers,
           body: reque,
@@ -961,7 +961,7 @@ function agregaremedio(){
   let cantidad = document.getElementById("canMED")
   let descripcion = document.getElementById("deMED");
 
-  fetch('http://localhost:5000/remedios', { 
+  fetch('http://35.184.158.26:5000/remedios', { 
     method: 'POST',
     headers,
     body: `{
@@ -993,7 +993,7 @@ function agregaremedio(){
 
 //VER DATA PACIENTE
 function verpaciente(usuario){
-    fetch('http://localhost:5000/pacientes/'+usuario)
+    fetch('http://35.184.158.26:5000/pacientes/'+usuario)
     .then(response => response.json())
     .then(data =>{
         document.getElementById("namePACI").value = data.nombre;

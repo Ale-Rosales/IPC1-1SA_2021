@@ -2,7 +2,7 @@
 let headers = new Headers()
 headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
-headers.append('Access-Control-Allow-Origin', 'http://localhost:5000');
+headers.append('Access-Control-Allow-Origin', 'http://35.184.158.26:5000');
 headers.append('Access-Control-Allow-Credentials', 'true');
 headers.append('GET', 'POST', 'OPTIONS','PUT','DELETE');
 
@@ -18,7 +18,7 @@ function myFunction() {
 
 //VER DATA ENFERMERA
 function verenfermera(usuario){
-  fetch('http://localhost:5000/enfermeras/'+usuario)
+  fetch('http://35.184.158.26:5000/enfermeras/'+usuario)
   .then(response => response.json())
   .then(data =>{
       document.getElementById("nameEN").value = data.nombre;
@@ -63,7 +63,7 @@ function modificarenfermera(){
         "telefono":"${telefono.value}"
       }`
     
-      fetch('http://localhost:5000/enfermeras/'+user.value, {
+      fetch('http://35.184.158.26:5000/enfermeras/'+user.value, {
         method: 'PUT',
         headers,
         body: reque,
@@ -90,7 +90,7 @@ function modificarenfermera(){
 
 //MOSTRAR CITAS
 let text="";
-fetch('http://localhost:5000/obtenercitas')
+fetch('http://35.184.158.26:5000/obtenercitas')
 .then(response => response.json())
 .then(data =>{
     var i;
@@ -116,7 +116,7 @@ fetch('http://localhost:5000/obtenercitas')
 //ACTUALIZAR CITAS
 function actualizarcita(){
   let text="";
-  fetch('http://localhost:5000/obtenercitas')
+  fetch('http://35.184.158.26:5000/obtenercitas')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -144,7 +144,7 @@ function actualizarcita(){
 function aceptarcita(USpaciente){
   let doctor = document.getElementById("doctor");
 
-  fetch('http://localhost:5000/citas/'+USpaciente)
+  fetch('http://35.184.158.26:5000/citas/'+USpaciente)
   .then(response => response.json())
   .then(data =>{
     let headers = new Headers();
@@ -159,7 +159,7 @@ function aceptarcita(USpaciente){
           "nomDoc":"${doctor.value}",
           "estado":"${"Aceptada"}"
         }`
-          fetch('http://localhost:5000/citas/'+ USpaciente, {
+          fetch('http://35.184.158.26:5000/citas/'+ USpaciente, {
             method: 'PUT',
             headers,
             body: reque,
@@ -181,7 +181,7 @@ function aceptarcita(USpaciente){
 //ACTUALIZAR ACEPTADAS
 function veraceptadas(){
   let text2="";
-  fetch('http://localhost:5000/aceptadas')
+  fetch('http://35.184.158.26:5000/aceptadas')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -205,7 +205,7 @@ function veraceptadas(){
 
 //VER ACEPTADAS
 let text2="";
-fetch('http://localhost:5000/aceptadas')
+fetch('http://35.184.158.26:5000/aceptadas')
 .then(response => response.json())
 .then(data =>{
     var i;
@@ -228,7 +228,7 @@ fetch('http://localhost:5000/aceptadas')
 
 //RECHAZAR CITAS
 function rechazocita(USpaciente){
-  fetch('http://localhost:5000/citas/'+USpaciente)
+  fetch('http://35.184.158.26:5000/citas/'+USpaciente)
   .then(response => response.json())
   .then(data =>{
     let headers = new Headers();
@@ -243,7 +243,7 @@ function rechazocita(USpaciente){
           "nomDoc":"${"SinDoctor"}",
           "estado":"${"Rechazada"}"
         }`
-          fetch('http://localhost:5000/rechazos/'+ USpaciente, {
+          fetch('http://35.184.158.26:5000/rechazos/'+ USpaciente, {
             method: 'PUT',
             headers,
             body: reque,
@@ -264,7 +264,7 @@ function rechazocita(USpaciente){
 //MOSTRAR SELECT PARA DOCTORES
   let text3=""
   text3 = `<select style="width:100px; height: 30px;">`
-  fetch('http://localhost:5000/obtenerdoctores')
+  fetch('http://35.184.158.26:5000/obtenerdoctores')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -281,7 +281,7 @@ function rechazocita(USpaciente){
 function doctores(){
   let text3=""
   text3 = `<select style="width:100px; height: 30px;">`
-  fetch('http://localhost:5000/obtenerdoctores')
+  fetch('http://35.184.158.26:5000/obtenerdoctores')
   .then(response => response.json())
   .then(data =>{
       var i;

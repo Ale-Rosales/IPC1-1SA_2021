@@ -2,7 +2,7 @@
 let headers = new Headers()
 headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
-headers.append('Access-Control-Allow-Origin', 'http://localhost:5000');
+headers.append('Access-Control-Allow-Origin', 'http://35.184.158.26:5000');
 headers.append('Access-Control-Allow-Credentials', 'true');
 headers.append('GET', 'POST', 'OPTIONS','PUT','DELETE');
 
@@ -26,7 +26,7 @@ function cerrar(){
 
 //VER DATA DOCTOR
 function verdoctor(usuario){
-  fetch('http://localhost:5000/doctores/'+usuario)
+  fetch('http://35.184.158.26:5000/doctores/'+usuario)
   .then(response => response.json())
   .then(data =>{
       document.getElementById("nameDOC").value = data.nombre;
@@ -67,7 +67,7 @@ function modificardoctor(){
         "telefono":"${telefono.value}"
       }`
     
-      fetch('http://localhost:5000/doctores/'+user.value, {
+      fetch('http://35.184.158.26:5000/doctores/'+user.value, {
         method: 'PUT',
         headers,
         body: reque,
@@ -98,7 +98,7 @@ function modificardoctor(){
 
 //MOSTRAR CITAS
 let text="";
-fetch('http://localhost:5000/obtenercitas')
+fetch('http://35.184.158.26:5000/obtenercitas')
 .then(response => response.json())
 .then(data =>{
     var i;
@@ -124,7 +124,7 @@ fetch('http://localhost:5000/obtenercitas')
 //ACTUALIZAR CITAS
 function actualizarcita(){
   let text="";
-  fetch('http://localhost:5000/obtenercitas')
+  fetch('http://35.184.158.26:5000/obtenercitas')
   .then(response => response.json())
   .then(data =>{
       var i;
@@ -150,7 +150,7 @@ function actualizarcita(){
 
 //ACEPTAR CITAS
 function aceptarcita(USpaciente){
-  fetch('http://localhost:5000/citas/'+USpaciente)
+  fetch('http://35.184.158.26:5000/citas/'+USpaciente)
   .then(response => response.json())
   .then(data =>{
     let headers = new Headers();
@@ -165,7 +165,7 @@ function aceptarcita(USpaciente){
           "nomDoc":"${localStorage.getItem("nombre")}",
           "estado":"${"Aceptada"}"
         }`
-          fetch('http://localhost:5000/citas/'+ USpaciente, {
+          fetch('http://35.184.158.26:5000/citas/'+ USpaciente, {
             method: 'PUT',
             headers,
             body: reque,
@@ -184,7 +184,7 @@ function aceptarcita(USpaciente){
 
 //RECHAZAR CITAS
 function rechazocita(USpaciente){
-  fetch('http://localhost:5000/citas/'+USpaciente)
+  fetch('http://35.184.158.26:5000/citas/'+USpaciente)
   .then(response => response.json())
   .then(data =>{
     let headers = new Headers();
@@ -199,7 +199,7 @@ function rechazocita(USpaciente){
           "nomDoc":"${"SinDoctor"}",
           "estado":"${"Rechazada"}"
         }`
-          fetch('http://localhost:5000/rechazos/'+ USpaciente, {
+          fetch('http://35.184.158.26:5000/rechazos/'+ USpaciente, {
             method: 'PUT',
             headers,
             body: reque,
