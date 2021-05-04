@@ -2,6 +2,7 @@ import json
 from Usuarios import Usuario
 from Medicamento import Remedio
 from Citas import Cita
+from Compras import Carrito
 import re
 
 class Gestor:
@@ -10,19 +11,11 @@ class Gestor:
         self.usuarios = []
         self.remedios = []
         self.citas = []
-        #self.aceptadas = []
+        self.compras = []
         self.usuarios.append(Usuario("Hebert", "Reyes", "SinFecha", "M", "admin", "1234", "SinEspecialidad", "SinTelefono", "Admin"))
         self.usuarios.append(Usuario("Alejandro", "Rosales", "2000-04-15", "M", "alejo", "123", "SinEspecialidad", "SinTelefono", "Paciente"))
         self.usuarios.append(Usuario("Andrea", "Fernanda", "SinFecha", "F", "andrea", "123", "SinEspecialidad", "SinTelefono", "Enfermera"))
         self.usuarios.append(Usuario("Hebert", "Reyes", "2021-04-08", "M", "herb", "123","Corazón", "SinTelefono", "Doctor"))
-        """
-        self.usuarios.append(Usuario("Alejandro", "Rosales", "2000-04-15", "M", "alejo", "123", "SinEspecialidad", "SinTelefono", "Paciente"))
-        self.usuarios.append(Usuario("Andrea", "Fernanda", "1998-04-08", "F", "andrefer", "1234", "Psicologa", "SinTelefono", "Paciente"))
-        self.usuarios.append(Usuario("Hebert", "Reyes", "2021-04-08", "M", "admin", "1234", "SinEspecialidad", "SinTelefono", "Paciente"))
-        self.usuarios.append(Usuario("Fernando", "Rosales", "SinFecha", "M", "fercho", "1234", "Cirujano", "SinTelefono", "Doctor"))
-        self.usuarios.append(Usuario("Andrea", "Fernanda", "SinFecha", "F", "andrefer", "1234", "Psicologa", "SinTelefono", "Enfermera"))
-        """
-
 
     #INICIAR SESION
     def iniciar_sesion(self,user,password):
@@ -209,7 +202,11 @@ class Gestor:
         self.citas.append(Cita(USpaciente,fecha,hora,motivo,nomDoc,estado))
 
     def obtener_citas(self):
-        return json.dumps([ob.__dict__ for ob in self.citas])
+        pendientes = []
+        for x in self.citas:
+            if x.estado == "Pendiente":
+                pendientes.append(x)
+        return json.dumps([ob.__dict__ for ob in pendientes])
 
     def rechazar_cita(self,paciente,USpaciente,fecha,hora,motivo,nomDoc,estadonuevo):
         for x in self.citas:
@@ -237,4 +234,19 @@ class Gestor:
             if x.USpaciente == usuario:
                 return x.__dict__
         return False
-    
+
+    #COMPRAS
+    def buscaremedio(self,nRemedio):
+        for x in self.remedios:
+            if x.nRemedio == nRemedio:
+                self.compras.append(x)
+        return json.dumps([ob.__dict__ for ob in self.compras])
+
+    def obtener_compras(self):
+        return json.dumps([ob.__dict__ for ob in self.compras])
+
+    def limpiar_carrito(self):
+        for x in self.compras:
+            self.compras.remove(x)
+            return True
+        return False 

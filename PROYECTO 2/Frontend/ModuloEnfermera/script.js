@@ -72,7 +72,7 @@ function modificarenfermera(){
       .then(result => {
         localStorage.removeItem("usuario")
         localStorage.setItem("usuario",usernew.value)
-        alert('Perfil Modificado, cerrar sesión para comprobar.')
+        alert('Perfil Modificado, cerrar sesión para comprobar')
         console.log('Success:', result);
         nombre.value=''
         apellido.value=''
@@ -99,7 +99,7 @@ fetch('http://localhost:5000/obtenercitas')
                 <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px; border: 1px solid black;">
                 <div class="card bg-light" style="width: auto;">
                 <div class="card-body">
-                    <h6 style="position:relative; left: 20px;">Usuario Paciente: ${data[i].USpaciente}</h6>
+                    <h6 style="position:relative; left: 20px; font-weight: bold;">Usuario Paciente: ${data[i].USpaciente}</h6>
                     <h8 style="position:relative; left: 20px;">Fecha: ${data[i].fecha}</h8></br>
                     <h8 style="position:relative; left: 20px;">Hora: ${data[i].hora}</h8>
                     <p style="position:relative; left: 20px;">Motivo: ${data[i].motivo}</p>
@@ -125,7 +125,7 @@ function actualizarcita(){
                   <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px; border: 1px solid black;">
                   <div class="card bg-light" style="width: auto;">
                   <div class="card-body">
-                      <h6 style="position:relative; left: 20px;">Usuario Paciente: ${data[i].USpaciente}</h6>
+                      <h6 style="position:relative; left: 20px; font-weight: bold;">Usuario Paciente: ${data[i].USpaciente}</h6>
                       <h8 style="position:relative; left: 20px;">Fecha: ${data[i].fecha}</h8></br>
                       <h8 style="position:relative; left: 20px;">Hora: ${data[i].hora}</h8>
                       <p style="position:relative; left: 20px;">Motivo: ${data[i].motivo}</p>
@@ -142,6 +142,8 @@ function actualizarcita(){
 
 //ACEPTAR CITAS
 function aceptarcita(USpaciente){
+  let doctor = document.getElementById("doctor");
+
   fetch('http://localhost:5000/citas/'+USpaciente)
   .then(response => response.json())
   .then(data =>{
@@ -154,7 +156,7 @@ function aceptarcita(USpaciente){
           "fecha":"${data.fecha}",
           "hora":"${data.hora}",
           "motivo":"${data.motivo}",
-          "nomDoc":"${localStorage.getItem("usuario")}",
+          "nomDoc":"${doctor.value}",
           "estado":"${"Aceptada"}"
         }`
           fetch('http://localhost:5000/citas/'+ USpaciente, {
@@ -168,6 +170,7 @@ function aceptarcita(USpaciente){
             alert('Cita Aceptada')
             veraceptadas()
             actualizarcita()
+            doctor.value = ''
           })
           .catch(error => {
             console.error('Error:', error);
@@ -187,10 +190,11 @@ function veraceptadas(){
                   <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px; border: 1px solid black; background: rgb(32, 105, 32);">
                   <div class="card bg-light" style="width: auto;">
                   <div class="card-body">
-                      <h6 style="position:relative; left: 20px;">Usuario Paciente: ${data[i].USpaciente}</h6>
+                      <h6 style="position:relative; left: 20px; font-weight: bold;">Usuario Paciente: ${data[i].USpaciente}</h6>
                       <h8 style="position:relative; left: 20px;">Fecha: ${data[i].fecha}</h8></br>
                       <h8 style="position:relative; left: 20px;">Hora: ${data[i].hora}</h8>
                       <p style="position:relative; left: 20px;">Motivo: ${data[i].motivo}</p>
+                      <p style="position:relative; left: 20px; font-weight: bold;">Doctor Asignado: ${data[i].nomDoc}</p>
                   </div>
                   </div>
                   </div>`
@@ -210,10 +214,11 @@ fetch('http://localhost:5000/aceptadas')
                 <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px; border: 1px solid black; background: rgb(32, 105, 32);">
                 <div class="card bg-light" style="width: auto;">
                 <div class="card-body">
-                    <h6 style="position:relative; left: 20px;">Usuario Paciente: ${data[i].USpaciente}</h6>
+                    <h6 style="position:relative; left: 20px; font-weight: bold;">Usuario Paciente: ${data[i].USpaciente}</h6>
                     <h8 style="position:relative; left: 20px;">Fecha: ${data[i].fecha}</h8></br>
                     <h8 style="position:relative; left: 20px;">Hora: ${data[i].hora}</h8>
                     <p style="position:relative; left: 20px;">Motivo: ${data[i].motivo}</p>
+                    <p style="position:relative; left: 20px; font-weight: bold;">Doctor Asignado: ${data[i].nomDoc}</p>
                 </div>
                 </div>
                 </div>`
@@ -253,5 +258,39 @@ function rechazocita(USpaciente){
           .catch(error => {
             console.error('Error:', error);
           });
+  });
+}
+
+//MOSTRAR SELECT PARA DOCTORES
+  let text3=""
+  text3 = `<select style="width:100px; height: 30px;">`
+  fetch('http://localhost:5000/obtenerdoctores')
+  .then(response => response.json())
+  .then(data =>{
+      var i;
+      for(i=0;i<data.length;i++){
+          text3+= `
+                  <option value="${data[i].nombre}">${data[i].nombre}</option>
+                  `
+    }
+      text3+=`</select>`
+      document.getElementById("select").innerHTML = text3;
+  });
+
+//DOCTORES ACTUALIZADOS
+function doctores(){
+  let text3=""
+  text3 = `<select style="width:100px; height: 30px;">`
+  fetch('http://localhost:5000/obtenerdoctores')
+  .then(response => response.json())
+  .then(data =>{
+      var i;
+      for(i=0;i<data.length;i++){
+          text3+= `
+                  <option value="${data[i].nombre}">${data[i].nombre}</option>
+                  `
+    }
+      text3+=`</select>`
+      document.getElementById("select").innerHTML = text3;
   });
 }

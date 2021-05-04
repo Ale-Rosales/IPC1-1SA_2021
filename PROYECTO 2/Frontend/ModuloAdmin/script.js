@@ -432,6 +432,7 @@ function modificarpaciente(){
       })
       .then(response => response.json())
       .then(result => {
+        alert('Paciente Actualizado')
         console.log('Success:', result);
         actualizarpaciente()
         nombre.value=''
@@ -579,7 +580,6 @@ function cargardoctor(){
           .catch(error => {
               console.error('Error:', error);
           });
-3
       }
       reader.onerror = function (evt) {
           
@@ -621,6 +621,7 @@ function modificardoctor(){
       })
       .then(response => response.json())
       .then(result => {
+        alert('Doctor Actualizado')
         console.log('Success:', result);
         actualizardoctor()
         nombre.value=''
@@ -805,6 +806,7 @@ function modificarenfermera(){
       })
       .then(response => response.json())
       .then(result => {
+        alert('Enfermera Actualizada')
         console.log('Success:', result);
         actualizarenfermera()
         nombre.value=''
@@ -832,7 +834,7 @@ fetch('http://localhost:5000/obtenermedicamento')
                 <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px; border: 1px solid black;">
                 <div class="card bg-light" style="width: auto;">
                 <div class="card-body">
-                    <h4 style="position:relative; left: 20px;">${data[i].nRemedio}</h4>
+                    <h4 style="position:relative; left: 20px; font-weight: bold;">${data[i].nRemedio}</h4>
                     <h5 style="position:relative; left: 20px;">Descripción: ${data[i].dRemedio}</h5>
                     <p style="position:relative; left: 20px;">Cantidad: ${data[i].cRemedio}</p>
                     <p style="position:relative; left: 20px;">Precio(Q): ${data[i].pRemedio}</p>
@@ -857,7 +859,7 @@ function actualizaremedio(){
                   <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px; border: 1px solid black;">
                   <div class="card bg-light" style="width: auto;">
                   <div class="card-body">
-                      <h4 style="position:relative; left: 20px;">${data[i].nRemedio}</h4>
+                      <h4 style="position:relative; left: 20px; font-weight: bold;">${data[i].nRemedio}</h4>
                       <h5 style="position:relative; left: 20px;">Descripción: ${data[i].dRemedio}</h5>
                       <p style="position:relative; left: 20px;">Cantidad: ${data[i].cRemedio}</p>
                       <p style="position:relative; left: 20px;">Precio(Q): ${data[i].pRemedio}</p>
@@ -938,6 +940,7 @@ function modificarmedicamento(){
         })
         .then(response => response.json())
         .then(result => {
+          alert('Medicamento Actualizado')
           console.log('Success:', result);
           actualizaremedio()
           nombreR.value=''
@@ -970,6 +973,7 @@ function agregaremedio(){
   })
   .then(response => response.json())
   .then(result => {
+    alert('Medicamento Agregado')
     console.log('Success:', result);
     actualizaremedio()
     nombre.value=''

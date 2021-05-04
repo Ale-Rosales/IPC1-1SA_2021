@@ -78,7 +78,7 @@ function modificardoctor(){
         localStorage.removeItem("nombre")
         localStorage.setItem("usuario",usernew.value)
         localStorage.setItem("nombre",nombre.value)
-        alert('Perfil Modificado, cerrar sesión para comprobar.')
+        alert('Perfil Modificado, cerrar sesión para comprobar')
         console.log('Success:', result);
         actualizardoctor()
         nombre.value=''
@@ -107,7 +107,7 @@ fetch('http://localhost:5000/obtenercitas')
                 <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px; border: 1px solid black;">
                 <div class="card bg-light" style="width: auto;">
                 <div class="card-body">
-                    <h6 style="position:relative; left: 20px;">Usuario Paciente: ${data[i].USpaciente}</h6>
+                    <h6 style="position:relative; left: 20px; font-weight: bold;">Usuario Paciente: ${data[i].USpaciente}</h6>
                     <h8 style="position:relative; left: 20px;">Fecha: ${data[i].fecha}</h8></br>
                     <h8 style="position:relative; left: 20px;">Hora: ${data[i].hora}</h8>
                     <p style="position:relative; left: 20px;">Motivo: ${data[i].motivo}</p>
@@ -133,7 +133,7 @@ function actualizarcita(){
                   <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px; border: 1px solid black;">
                   <div class="card bg-light" style="width: auto;">
                   <div class="card-body">
-                      <h6 style="position:relative; left: 20px;">Usuario Paciente: ${data[i].USpaciente}</h6>
+                      <h6 style="position:relative; left: 20px; font-weight: bold;">Usuario Paciente: ${data[i].USpaciente}</h6>
                       <h8 style="position:relative; left: 20px;">Fecha: ${data[i].fecha}</h8></br>
                       <h8 style="position:relative; left: 20px;">Hora: ${data[i].hora}</h8>
                       <p style="position:relative; left: 20px;">Motivo: ${data[i].motivo}</p>
@@ -174,7 +174,6 @@ function aceptarcita(USpaciente){
           .then(result => {
             console.log('Success:', result);
             alert('Cita Aceptada')
-            veraceptadas()
             actualizarcita()
           })
           .catch(error => {
@@ -209,7 +208,6 @@ function rechazocita(USpaciente){
           .then(result => {
             console.log('Success:', result);
             alert('Cita Rechazada')
-            veraceptadas()
             actualizarcita()
           })
           .catch(error => {

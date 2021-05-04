@@ -195,10 +195,20 @@ def obtener_aceptadas():
 def buscarcita(USpaciente):
     return gestor.buscarcitas(USpaciente)
 
+#COMPRAS (MEDIO)
+@app.route('/compras/<nRemedio>')
+def buscarmerca(nRemedio):
+    return gestor.buscaremedio(nRemedio)
 
+@app.route('/obtenercompras')
+def obtenercompras():
+    return gestor.obtener_compras()
 
-
-
+@app.route('/compras',methods=['DELETE'])
+def limpiar_carrito():
+    if(gestor.limpiar_carrito()):
+        return '{"data":"Carrito Limpio"}'
+    return '{"data":"Error"}'
 
 #Iniciar el Servidor
 if __name__ == "__main__":
